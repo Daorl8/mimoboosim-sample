@@ -129,9 +129,8 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
 @media (min-width:900px){ .about .wrap{ grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:72px; } }
 
 /* 가격 */
-.menu{ margin-top:40px; }
-.menu > .mcard{ margin-bottom:16px; }
-.mcard{ position:relative; overflow:hidden; break-inside:avoid; -webkit-column-break-inside:avoid; display:inline-block; width:100%; vertical-align:top; background:#FFFFFF; border:1px solid var(--line); border-radius:var(--r); padding:26px 22px; }
+.menu{ display:grid; grid-template-columns:minmax(0,1fr); gap:16px; margin-top:40px; align-items:start; }
+.mcard{ position:relative; overflow:hidden; background:#FFFFFF; border:1px solid var(--line); border-radius:var(--r); padding:26px 22px; }
 .mcard::before{ content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--grad); }
 .mcard h3{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; }
 .mcard h3 b{ font-family:var(--serif); font-weight:600; font-size:1.5rem; letter-spacing:.01em; color:var(--acc); }
@@ -146,9 +145,21 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
 .mcard .sub-h{ margin-top:14px; font-size:.85rem; font-weight:600; color:var(--mute); }
 .mcard .ph{ margin-top:16px; overflow:hidden; border-radius:var(--r); aspect-ratio:16/9; }
 .mcard .ph img{ width:100%; height:100%; object-fit:cover; }
-@media (min-width:768px){ .menu{ columns:2; column-gap:16px; } }
-@media (min-width:1080px){ .menu{ columns:3; } }
-.menu-note{ margin-top:4px; color:var(--soft); font-size:.92rem; }
+/* 사진 카드(왁싱 · 속눈썹)를 위에 나란히. 2단 = 그리드 배치(긴 왁싱 카드가 두 줄), 3단 = 세로 단 쌓기 */
+@media (min-width:768px) and (max-width:1079px){
+  .menu{ grid-template-columns:repeat(2, minmax(0,1fr)); grid-template-rows:auto 1fr auto; }
+  .m-wax{ grid-column:1; grid-row:1 / span 2; }
+  .m-lash{ grid-column:2; grid-row:1; }
+  .m-head{ grid-column:2; grid-row:2; }
+  .m-face{ grid-column:1; grid-row:3; }
+  .m-body{ grid-column:2; grid-row:3; }
+}
+@media (min-width:1080px){
+  .menu{ display:block; columns:3; column-gap:16px; }
+  .menu > .mcard{ display:inline-block; width:100%; vertical-align:top; margin-bottom:16px; break-inside:avoid; -webkit-column-break-inside:avoid; }
+  .menu + .menu-note{ margin-top:4px; }
+}
+.menu-note{ margin-top:20px; color:var(--soft); font-size:.92rem; }
 
 /* 교육 */
 .edu .wrap{ display:grid; gap:44px; align-items:center; }
@@ -269,7 +280,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
       <h2 id="price-h" class="reveal">가격표</h2>
       <p class="lead reveal">빠르고 안아픈 "퀵 브라질리언" 시술</p>
       <div class="menu">
-        <article class="mcard reveal">
+        <article class="mcard m-wax reveal">
           <h3><b>Waxing</b><small>왁싱</small></h3>
           <ul>
             <li><span><em>첫방문</em>(여)브라질리언</span><b>49,000원</b></li>
@@ -283,20 +294,20 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
           </ul>
           <div class="ph"><img src="mm-wax.webp" alt="라이콘 왁싱 진정젤 준비 과정" width="480" height="854" loading="lazy" /></div>
         </article>
-        <article class="mcard reveal">
+        <article class="mcard m-lash reveal">
           <h3><b>Lash</b><small>속눈썹</small></h3>
           <ul>
             <li><span>수분뷰러펌</span><b>35,000원</b></li>
           </ul>
           <div class="ph"><img src="mm-lash.webp" alt="속눈썹펌 후 눈매 클로즈업" width="503" height="503" loading="lazy" /></div>
         </article>
-        <article class="mcard reveal">
+        <article class="mcard m-head reveal">
           <h3><b>Head Spa</b><small>헤드스파</small></h3>
           <ul>
             <li><span><em>첫방문</em>헤드스파</span><b>39,000원</b></li>
           </ul>
         </article>
-        <article class="mcard reveal">
+        <article class="mcard m-face reveal">
           <h3><b>Face</b><small>페이스</small></h3>
           <ul>
             <li><span>미백케어</span><b>60,000원</b></li>
@@ -304,7 +315,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
             <li><span><span class="nw">알라딘필링 공식전문점</span> 등드름 케어</span><b>99,000원</b></li>
           </ul>
         </article>
-        <article class="mcard reveal">
+        <article class="mcard m-body reveal">
           <h3><b>Body</b><small>바디</small></h3>
           <ul>
             <li><span>부위별 슬리밍</span><b>60,000원</b></li>
