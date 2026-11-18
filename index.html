@@ -129,8 +129,9 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
 @media (min-width:900px){ .about .wrap{ grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:72px; } }
 
 /* 가격 */
-.menu{ display:grid; gap:16px; margin-top:40px; align-items:start; }
-.mcard{ position:relative; overflow:hidden; background:#FFFFFF; border:1px solid var(--line); border-radius:var(--r); padding:26px 22px; }
+.menu{ margin-top:40px; }
+.menu > .mcard{ margin-bottom:16px; }
+.mcard{ position:relative; overflow:hidden; break-inside:avoid; -webkit-column-break-inside:avoid; display:inline-block; width:100%; vertical-align:top; background:#FFFFFF; border:1px solid var(--line); border-radius:var(--r); padding:26px 22px; }
 .mcard::before{ content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--grad); }
 .mcard h3{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; }
 .mcard h3 b{ font-family:var(--serif); font-weight:600; font-size:1.5rem; letter-spacing:.01em; color:var(--acc); }
@@ -145,9 +146,9 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
 .mcard .sub-h{ margin-top:14px; font-size:.85rem; font-weight:600; color:var(--mute); }
 .mcard .ph{ margin-top:16px; overflow:hidden; border-radius:var(--r); aspect-ratio:16/9; }
 .mcard .ph img{ width:100%; height:100%; object-fit:cover; }
-@media (min-width:768px){ .menu{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
-@media (min-width:1080px){ .menu{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
-.menu-note{ margin-top:20px; color:var(--soft); font-size:.92rem; }
+@media (min-width:768px){ .menu{ columns:2; column-gap:16px; } }
+@media (min-width:1080px){ .menu{ columns:3; } }
+.menu-note{ margin-top:4px; color:var(--soft); font-size:.92rem; }
 
 /* 교육 */
 .edu .wrap{ display:grid; gap:44px; align-items:center; }
@@ -344,7 +345,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
       <p class="msg reveal">문자 or 전화로 성함과 시술항목 보내주시면 확인 후 순차적으로 안내 도와드리고 있습니다. 시술 중에는 바로 답장이 어려울 수 있으니 조금만 기다려주세요.</p>
       <div class="row reveal">
         <a class="btn fill" href="tel:050713680878">전화 <span class="nw">0507-1368-0878</span></a>
-        <a class="btn" href="sms:01075960878">문자 <span class="nw">010-7596-0878</span></a>
+        <a class="btn" href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">인스타그램</a>
       </div>
     </div>
   </section>
