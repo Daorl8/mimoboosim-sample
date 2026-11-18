@@ -145,7 +145,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
 .mcard .sub-h{ margin-top:14px; font-size:.85rem; font-weight:600; color:var(--mute); }
 .mcard .ph{ margin-top:16px; overflow:hidden; border-radius:var(--r); aspect-ratio:16/9; }
 .mcard .ph img{ width:100%; height:100%; object-fit:cover; }
-/* 사진 카드(왁싱 · 속눈썹)를 위에 나란히. 2단 = 그리드 배치(긴 왁싱 카드가 두 줄), 3단 = 세로 단 쌓기 */
+/* 2단 = 왁싱(두 줄) | 속눈썹 · 헤드스파, 아래 페이스 · 바디 / 3단 = 왁싱 | 헤드스파 · 페이스 · 바디 | 속눈썹 (다올 지정) */
 @media (min-width:768px) and (max-width:1079px){
   .menu{ grid-template-columns:repeat(2, minmax(0,1fr)); grid-template-rows:auto 1fr auto; }
   .m-wax{ grid-column:1; grid-row:1 / span 2; }
@@ -155,9 +155,14 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
   .m-body{ grid-column:2; grid-row:3; }
 }
 @media (min-width:1080px){
-  .menu{ display:block; columns:3; column-gap:16px; }
-  .menu > .mcard{ display:inline-block; width:100%; vertical-align:top; margin-bottom:16px; break-inside:avoid; -webkit-column-break-inside:avoid; }
-  .menu + .menu-note{ margin-top:4px; }
+  .menu{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .m-wax{ grid-column:1; grid-row:1 / span 3; }
+  .m-head{ grid-column:2; grid-row:1; }
+  .m-face{ grid-column:2; grid-row:2; }
+  .m-body{ grid-column:2; grid-row:3; }
+  .m-lash{ grid-column:3; grid-row:1 / span 3; }
+}
+.menu-note{ margin-top:4px; }
 }
 .menu-note{ margin-top:20px; color:var(--soft); font-size:.92rem; }
 
