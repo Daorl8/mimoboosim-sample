@@ -67,7 +67,7 @@ a{ color:inherit; }
 .nw{ white-space:nowrap; }
 
 /* 헤더 */
-.top{ position:sticky; top:0; z-index:50; background:rgba(255,249,250,.97); border-bottom:1px solid var(--line); }
+.top{ position:sticky; top:0; z-index:50; background:#FFF9FA; border-bottom:1px solid var(--line); }
 .top::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--grad); }
 .top .bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:66px; }
 .brand{ display:flex; align-items:center; text-decoration:none; }
@@ -162,8 +162,6 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
   .m-body{ grid-column:2; grid-row:3; }
   .m-lash{ grid-column:3; grid-row:1 / span 3; }
 }
-.menu-note{ margin-top:4px; }
-}
 .menu-note{ margin-top:20px; color:var(--soft); font-size:.92rem; }
 
 /* 교육 */
@@ -195,6 +193,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
 .hours{ list-style:none; }
 .hours li{ display:flex; gap:14px; }
 .hours li b{ font-weight:500; min-width:3.6em; }
+.info .hnote{ margin-top:4px; padding-left:calc(3.492rem + 14px); font-size:.9rem; color:var(--soft); }
 .visit .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
 .map{ width:100%; height:280px; border:0; border-radius:var(--r); background:var(--bg2); display:block; }
 @media (min-width:900px){ .visit .wrap{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px; align-items:start; } .map{ height:100%; min-height:520px; } }
@@ -266,7 +265,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
       <div>
         <p class="en reveal">About</p>
         <h2 id="about-h" class="reveal">친절하고 꼼꼼하게 <span class="nw">고객님을 응대해 드립니다.</span></h2>
-        <p class="body reveal">미모부심은 프라이빗 ROOM 6개로 1인 케어룸 , 커플룸 이 있으며, 모든룸 전동베드 ,개별룸 냉난방기, 개별룸 샤워실 , 1회용 제품 사용으로 위생적이고 청결한 케어를 받으실 수 있습니다.</p>
+        <p class="body reveal">미모부심은 프라이빗 ROOM 6개로 1인 케어룸, 커플룸이 있으며, 모든룸 전동베드, 개별룸 냉난방기, 개별룸 샤워실, 1회용 제품 사용으로 위생적이고 청결한 케어를 받으실 수 있습니다.</p>
         <ul class="facts">
           <li class="reveal">프라이빗 ROOM 6개</li>
           <li class="reveal">1인 케어룸 · 커플룸</li>
@@ -317,7 +316,6 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
           <ul>
             <li><span>미백케어</span><b>60,000원</b></li>
             <li><span>썬번 수분케어</span><b>60,000원</b></li>
-            <li><span><span class="nw">알라딘필링 공식전문점</span> 등드름 케어</span><b>99,000원</b></li>
           </ul>
         </article>
         <article class="mcard m-body reveal">
@@ -326,6 +324,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
             <li><span>부위별 슬리밍</span><b>60,000원</b></li>
             <li><span>슬리밍3+포톤3+빼라피3</span><b>360,000원</b></li>
             <li><span><span class="nw">누워서 살빼자</span> 바이오포톤&amp;빼라피</span><b>60,000원</b></li>
+            <li><span><span class="nw">알라딘필링 공식전문점</span> 등드름 케어</span><b>99,000원</b></li>
           </ul>
         </article>
       </div>
@@ -372,7 +371,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
         <p class="en reveal">Visit</p>
         <h2 id="visit-h" class="reveal">오시는 길</h2>
         <dl class="info reveal">
-          <div><dt>주소</dt><dd><p>경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span></p><p>주엽역 6번 출구에서 71m</p></dd></div>
+          <div><dt>주소</dt><dd><p>경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span></p></dd></div>
           <div><dt>찾아가는 길</dt><dd><p>주엽역 그랜드 백화점 건너편 7번 출구 앞 다이소 주엽점 건물 2층으로 오시면 됩니다.</p><p>3호선 주엽역 7번출구에서 도보1분</p><p>주엽역 버스 중앙차로에서 도보5분</p></dd></div>
           <div><dt>주차</dt><dd><p>주차공간 여유(무료주차)</p><p>네비게이션에 다이소 주엽점 입력하시고 삼희프라자에 주차하시면 됩니다.</p></dd></div>
           <div><dt>영업시간</dt><dd>
@@ -380,7 +379,7 @@ h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; l
               <li><b>월–토</b><span class="nw">10:00 - 22:30</span></li>
               <li><b>일</b><span>정기휴무 <span class="nw">(매주 일요일)</span></span></li>
             </ul>
-            <p>- 일요일은 예약제로 운영합니다.</p>
+            <p class="hnote">일요일은 예약제로 운영합니다.</p>
           </dd></div>
           <div><dt>전화</dt><dd><p><a href="tel:050713680878" class="nw">0507-1368-0878</a></p></dd></div>
         </dl>
