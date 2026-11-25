@@ -280,7 +280,6 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
 :root{ --mag:#A81854; }  /* 로고 마젠타 · 흰 바탕 7.2:1 · 번호 · 가는 선에만 */
 /* 히어로 PC 좌우 분할: 오른쪽 큰 원장 사진 */
 .d-portrait{ display:none; margin:0; }
-.profile-top{ grid-template-columns:1fr; }
 @media (min-width:900px){
   .hero .wrap{ grid-template-columns:minmax(0,1fr) minmax(0,440px); justify-content:stretch; align-items:center; gap:clamp(40px,5vw,80px); }
   .d-portrait{ display:block; position:relative; aspect-ratio:4/5; overflow:hidden; border:1px solid var(--blush-2); border-radius:var(--r); background:var(--blush-soft); }
@@ -367,6 +366,13 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
 .rv-card p{ order:1; }
 .rv-top{ order:2; margin:14px 0 0; padding-top:10px; border-top:1px solid var(--line); }
 .rv-src{ order:3; margin-top:4px; }
+
+/* v0.3.4 원장 작은 사진을 프로필 카드 안에 (다올) · 큰 사진은 매장 · 900 미만도 카드 사진 표시(위 큰 사진이 매장이라) */
+@media (max-width:899.98px){
+  .profile-top{ display:flex; flex-direction:row; align-items:center; justify-content:center; gap:14px; text-align:left; }
+  .profile-top img{ display:block; width:64px; flex:none; }
+  .profile .name{ font-size:1.3rem; }
+}
 </style>
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
@@ -395,6 +401,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
         <p class="label kicker">Waxing &amp; Head Spa · Juyeop, Ilsan</p>
         <div class="profile">
           <div class="profile-top">
+            <img src="mm-owner.webp" alt="미모부심 김유지 원장 프로필 사진" width="480" height="640" />
             <div>
               <p class="name">김유지<small>원장</small></p>
               <p class="cred">[LYCON 인증 교육 강사 | <span class="nw">자디니스파 총괄교육센터]</span></p>
