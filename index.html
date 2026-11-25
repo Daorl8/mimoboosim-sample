@@ -17,7 +17,7 @@
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#FFF9FA" />
+<meta name="theme-color" content="#FFFFFF" />
 <link rel="icon" href="favicon.png" type="image/png" />
 <!-- 시안 도메인 = mimoboosim-sample.lgt3232.workers.dev. 고객 인계 시 grep lgt3232 → canonical·og:url·og:image·JSON-LD url/image 치환 -->
 <script type="application/ld+json">
@@ -36,400 +36,645 @@
 }
 </script>
 <style>
-@font-face{ font-family:"MM Serif"; font-weight:400 600; font-display:swap; src:url("mm-cormorant.woff2") format("woff2"); }
-@font-face{ font-family:"MM Serif"; font-style:italic; font-weight:400 600; font-display:swap; src:url("mm-cormorant-i.woff2") format("woff2"); }
-@font-face{ font-family:"MM Sans"; font-weight:300 700; font-display:swap; src:url("mm-pretendard.woff2") format("woff2"); }
-:root{
-  --bg:#FFF9FA;
-  --bg2:#FDEEF2;
-  --ink:#2A1E23;
-  --soft:#5E4A52;
-  --mute:#6E5C63;
-  --acc:#A81854;
-  --acc2:#C0305F;
-  --coral:#F0906C;
-  --pink:#F8D4E0;
-  --rose:#FDE6EE;
-  --line:#F1D9E0;
-  --grad:linear-gradient(90deg,#F8C3D4,#F7B9A6);
-  --wash:linear-gradient(160deg,#FDE6EE 0%,#FCEDEA 55%,#FFF9FA 100%);
-  --r:2px;
-  --serif:"MM Serif","MM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --sans:"MM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-}
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; scroll-padding-top:116px; -webkit-text-size-adjust:100%; }
-body{ font-family:var(--sans); color:var(--ink); background:var(--bg); line-height:1.75; font-size:16px; -webkit-font-smoothing:antialiased; word-break:keep-all; overflow-wrap:break-word; }
-img{ max-width:100%; height:auto; display:block; }
-a{ color:inherit; }
-:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
-.wrap{ width:min(100% - 40px, 1140px); margin-inline:auto; }
-.nw{ white-space:nowrap; }
+/* ── 폰트 (로컬 서브셋 · OFL · 라이선스 정보 보존)
+     영문 제목 = Gilda Display / 한글·본문·작은 영문 = Interop (우호뷰티 샘플과 같은 조합 · v0.3 사장님 요청) */
+@font-face{ font-family:"MM Display"; font-weight:400; font-display:swap; src:url("mm-gilda.woff2") format("woff2"); }
+@font-face{ font-family:"MM Sans"; font-weight:400; font-display:swap; src:url("mm-interop-400.woff2") format("woff2"); }
+@font-face{ font-family:"MM Sans"; font-weight:500; font-display:swap; src:url("mm-interop-500.woff2") format("woff2"); }
 
-/* 헤더 */
-.top{ position:sticky; top:0; z-index:50; background:#FFF9FA; border-bottom:1px solid var(--line); }
-.top::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--grad); }
-.top .bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:66px; }
-.brand{ display:flex; align-items:center; text-decoration:none; }
-.brand img{ width:104px; height:auto; }
-.nav{ display:none; gap:28px; font-size:.92rem; }
-.nav a{ text-decoration:none; color:var(--soft); }
-.top .btn{ min-height:40px; padding:0 18px; font-size:.86rem; }
-.snav{ display:flex; gap:2px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; border-top:1px solid var(--line); padding:0 12px; }
-.snav::-webkit-scrollbar{ display:none; }
-.snav a{ flex:0 0 auto; display:flex; align-items:center; min-height:44px; padding:0 12px; font-size:.9rem; text-decoration:none; color:var(--soft); white-space:nowrap; }
-.snav a:first-child{ margin-left:auto; } .snav a:last-child{ margin-right:auto; }
-@media (min-width:900px){ .nav{ display:flex; } .snav{ display:none; } html{ scroll-padding-top:74px; } .top .bar{ display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); } .top .bar .btn{ justify-self:end; } }
-@media (max-width:899.98px){ .top .btn{ display:none; } }
-@media (hover:hover){ .nav a:hover, .snav a:hover{ color:var(--ink); } }
+:root{
+  --white:#FFFFFF;
+  --blush-soft:rgba(253,242,244,.6);   /* 아주 옅은 분홍 면 (v0.1.2 원래 색조 + 투명도) */
+  --blush:rgba(247,220,227,.55);        /* 연분홍 #F7DCE3 · 투명도 55% */
+  --blush-2:rgba(237,191,203,.6);      /* 진한 연분홍 #EDBFCB · 투명도 60% */
+  --line:#EFE6E8;
+  --ink:#1E1A1B;
+  --soft:#625A5C;         /* 흰 바탕 6.7:1 */
+  --grad:linear-gradient(120deg,rgba(251,230,235,.55) 0%,rgba(244,211,220,.55) 48%,rgba(253,242,244,.55) 100%);
+  --disp:"MM Display","MM Sans",sans-serif;
+  --sans:"MM Sans",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --wrap:1180px;
+  --r:2px;
+}
+*{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{ margin:0; background:var(--white); color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.75; letter-spacing:-.005em; word-break:keep-all; overflow-x:hidden; }
+img{ display:block; max-width:100%; height:auto; }
+a{ color:inherit; text-decoration:none; }
+::selection{ background:var(--blush); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.wrap{ width:min(100% - 40px, var(--wrap)); margin:0 auto; }
+
+/* 타이포 */
+.label{ font-size:.72rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--soft); margin:0; }
+.label .ko{ letter-spacing:.04em; text-transform:none; margin-left:8px; font-weight:400; }
+h1,h2,h3{ font-family:var(--disp); font-weight:400; letter-spacing:-.01em; margin:0; }
+h2{ font-size:clamp(2.1rem,5vw,3.6rem); line-height:1.08; }
+.ko-t{ display:block; font-family:var(--sans); font-size:.95rem; font-weight:400; color:var(--soft); margin-top:14px; line-height:1.6; }
+.lead{ color:var(--soft); max-width:36em; margin:0; }
 
 /* 버튼 */
-.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:50px; padding:0 24px; border-radius:var(--r); text-decoration:none; font-weight:600; font-size:.95rem; color:var(--acc); background:#FFFFFF; border:1.5px solid var(--acc); transition:transform .1s, background-color .2s, color .2s; }
-.btn.fill{ background:var(--acc); border-color:var(--acc); color:#FFFFFF; }
-.btn:active{ transform:scale(.98); }
-@media (hover:hover){ .btn:hover{ background:var(--rose); } .btn.fill:hover{ background:var(--acc2); border-color:var(--acc2); } }
-
-/* 공통 */
-.sec{ padding:104px 0; }
-.sec.alt{ background:var(--wash); }
-.en{ display:inline-flex; align-items:center; gap:10px; font-family:var(--serif); font-style:italic; font-weight:500; font-size:1.12rem; color:var(--acc); }
-.en::before{ content:""; width:28px; height:2px; background:var(--grad); }
-h2{ font-weight:600; font-size:clamp(1.5rem, 4.4vw, 2.2rem); line-height:1.42; letter-spacing:-.02em; margin-top:12px; }
-.lead{ color:var(--soft); margin-top:16px; max-width:38em; }
-
-/* 히어로 */
-.hero{ position:relative; overflow:hidden; padding:44px 0 88px; background:var(--wash); }
-.hero::before, .hero::after{ content:""; position:absolute; pointer-events:none; }
-.hero::before{ width:620px; height:620px; right:-200px; top:-180px; background:radial-gradient(closest-side, rgba(248,195,212,.75), rgba(248,195,212,0)); }
-.hero::after{ width:520px; height:520px; left:-220px; bottom:-240px; background:radial-gradient(closest-side, rgba(247,185,166,.55), rgba(247,185,166,0)); }
-.hero .wrap{ position:relative; z-index:1; }
-.hero .wrap{ display:grid; gap:40px; align-items:center; }
-.hero .label{ font-family:var(--serif); font-size:1.02rem; font-weight:600; letter-spacing:.16em; color:var(--acc); }
-.hero h1{ margin-top:18px; }
-.hero h1 img{ width:min(100%, 360px); }
-.hero .tag{ margin-top:22px; font-size:clamp(1.15rem, 3.6vw, 1.4rem); font-weight:500; letter-spacing:-.01em; }
-.hero .sub{ margin-top:10px; color:var(--soft); }
-.hero .care{ margin-top:18px; font-size:.95rem; color:var(--mute); }
-.cta3{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:30px; max-width:520px; }
-.cta3 .btn:first-child{ grid-column:1 / -1; }
-@media (max-width:439.98px){ .cta3{ grid-template-columns:minmax(0,1fr); } }
-.hero figure{ position:relative; margin:0; }
-.hero figure img{ width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 20%; border-radius:var(--r); }
-.hero figure::after{ content:""; position:absolute; inset:14px -14px -14px 14px; background:var(--grad); opacity:.55; border-radius:var(--r); z-index:-1; }
-@media (min-width:900px){ .hero{ padding:72px 0 112px; } .hero .wrap{ grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:72px; } .hero figure{ max-width:440px; justify-self:end; width:100%; } }
-
-/* 소개 */
-.about .wrap{ display:grid; gap:44px; align-items:center; }
-.about figure{ margin:0; }
-.about figure img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:var(--r); }
-.about p.body{ margin-top:18px; color:var(--soft); }
-.facts{ list-style:none; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:28px; }
-.facts li{ padding:14px 16px; background:var(--bg); border:1px solid var(--line); border-radius:var(--r); font-size:.95rem; font-weight:500; }
-.sec.alt .facts li{ background:#FFFFFF; }
-@media (min-width:900px){ .about .wrap{ grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:72px; } }
-
-/* 가격 */
-.menu{ display:grid; grid-template-columns:minmax(0,1fr); gap:16px; margin-top:40px; align-items:start; }
-.mcard{ position:relative; overflow:hidden; background:#FFFFFF; border:1px solid var(--line); border-radius:var(--r); padding:26px 22px; }
-.mcard::before{ content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--grad); }
-.mcard h3{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; }
-.mcard h3 b{ font-family:var(--serif); font-weight:600; font-size:1.5rem; letter-spacing:.01em; color:var(--acc); }
-.mcard h3 small{ font-size:.88rem; font-weight:500; color:var(--mute); }
-.mcard .note{ margin-top:6px; font-size:.9rem; color:var(--acc); font-weight:500; }
-.mcard ul{ list-style:none; margin-top:12px; }
-.mcard li{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:11px 0; border-bottom:1px dashed var(--line); }
-.mcard li:last-child{ border-bottom:0; }
-.mcard li span{ min-width:0; }
-.mcard li b{ font-weight:600; white-space:nowrap; font-variant-numeric:tabular-nums; }
-.mcard li em{ font-style:normal; font-size:.8rem; font-weight:600; color:var(--acc); margin-right:6px; }
-.mcard .sub-h{ margin-top:14px; font-size:.85rem; font-weight:600; color:var(--mute); }
-.mcard .ph{ margin-top:16px; overflow:hidden; border-radius:var(--r); aspect-ratio:16/9; }
-.mcard .ph img{ width:100%; height:100%; object-fit:cover; }
-/* 2단 = 왁싱(두 줄) | 속눈썹 · 헤드스파, 아래 페이스 · 바디 / 3단 = 왁싱 | 헤드스파 · 페이스 · 바디 | 속눈썹 (다올 지정) */
-@media (min-width:768px) and (max-width:1079.98px){
-  .menu{ grid-template-columns:repeat(2, minmax(0,1fr)); grid-template-rows:auto 1fr auto; }
-  .m-wax{ grid-column:1; grid-row:1 / span 2; }
-  .m-lash{ grid-column:2; grid-row:1; }
-  .m-head{ grid-column:2; grid-row:2; }
-  .m-face{ grid-column:1; grid-row:3; }
-  .m-body{ grid-column:2; grid-row:3; }
+.btn{ display:inline-flex; align-items:center; gap:10px; height:50px; padding:0 24px; border:1px solid var(--ink); font-size:.86rem; font-weight:500; letter-spacing:.02em; transition:background .3s ease, color .3s ease, border-color .3s ease; }
+.btn small{ font-weight:400; opacity:.75; }
+.btn.dark{ background:var(--ink); color:var(--white); }
+.btn.blush{ background:var(--grad); border-color:var(--blush-2); }
+.btn.line{ background:transparent; }
+@media (hover:hover){
+  .btn.dark:hover{ background:var(--grad); color:var(--ink); border-color:var(--blush-2); }
+  .btn.blush:hover, .btn.line:hover{ background:var(--ink); color:var(--white); border-color:var(--ink); }
 }
-@media (min-width:1080px){
-  .menu{ grid-template-columns:repeat(3, minmax(0,1fr)); }
-  .m-wax{ grid-column:1; grid-row:1 / span 3; }
-  .m-head{ grid-column:2; grid-row:1; }
-  .m-face{ grid-column:2; grid-row:2; }
-  .m-body{ grid-column:2; grid-row:3; }
-  .m-lash{ grid-column:3; grid-row:1 / span 3; }
+
+/* 헤더 */
+.site-head{ position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+.site-head .wrap{ display:flex; align-items:center; justify-content:space-between; height:68px; }
+.brand{ font-family:var(--disp); font-size:1.2rem; letter-spacing:.14em; }
+.nav{ display:none; gap:28px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; }
+.nav a{ position:relative; padding:4px 0; }
+.nav a::after{ content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--grad); transform:scaleX(0); transform-origin:left; transition:transform .3s ease; }
+@media (hover:hover){ .nav a:hover::after{ transform:scaleX(1); } }
+.site-head .btn{ height:40px; padding:0 18px; font-size:.8rem; }
+@media (min-width:900px){ .nav{ display:flex; } }
+
+/* 히어로 (연분홍 그라데이션 빛) */
+.hero{ position:relative; padding:clamp(36px,6vw,80px) 0 clamp(28px,4vw,56px); background:
+  radial-gradient(60% 55% at 88% 18%, rgba(244,207,217,.45) 0%, rgba(244,207,217,0) 70%),
+  radial-gradient(45% 50% at 8% 92%, rgba(250,228,234,.55) 0%, rgba(250,228,234,0) 70%),
+  var(--white); overflow:hidden; }
+.hero .wrap{ display:grid; gap:40px; position:relative; }
+.kicker{ display:flex; align-items:center; gap:10px; }
+.kicker::before{ content:""; width:22px; height:8px; border-radius:var(--r); background:var(--grad); border:1px solid var(--blush-2); }
+/* 원장 프로필 카드 (v0.2 사장님 요청: 증명사진처럼 작게) */
+.profile{ margin-top:24px; padding:clamp(22px,3vw,34px); background:rgba(255,255,255,.72); border:1px solid var(--blush-2); border-radius:var(--r); }
+.profile-top{ display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center; }
+.profile-top img{ width:104px; height:auto; aspect-ratio:3/4; object-fit:cover; border:1px solid var(--line); border-radius:2px; background:var(--blush-soft); }
+.profile .name{ margin:0; font-size:1.35rem; font-weight:500; line-height:1.3; }
+.profile .name small{ font-size:.92rem; font-weight:400; color:var(--soft); margin-left:6px; }
+.profile .cred{ margin:6px 0 0; font-size:.86rem; color:var(--soft); }
+.hero h1{ font-family:var(--sans); font-weight:500; font-size:clamp(1.3rem,2.8vw,1.95rem); line-height:1.4; letter-spacing:-.02em; margin:20px 0 0; }
+.points{ margin:12px 0 20px; padding:0; list-style:none; display:grid; gap:2px; font-size:.95rem; line-height:1.65; }
+.points li{ position:relative; padding-left:16px; }
+.points li::before{ content:""; position:absolute; left:0; top:.85em; width:7px; height:1px; background:var(--ink); }
+.cta{ display:flex; flex-wrap:wrap; gap:10px; }
+@media (min-width:600px){ .profile-top img{ width:120px; } }
+
+/* 모바일 전용 원장 사진 (v0.2.3 사장님 2차: 화면 꽉 차게 → 가운데 작게). PC는 작은 증명사진 그대로 */
+.m-portrait, .m-kicker{ display:none; }
+.m-br{ display:none; }
+@media (max-width:899.98px){ .m-br{ display:inline; } }
+@media (max-width:899.98px){
+  .hero{ padding-top:22px; padding-bottom:28px; }
+  .hero .wrap{ gap:28px; }
+  #pro{ padding-top:48px; }
+  .profile h1{ margin-top:14px; }
+  .m-portrait{ display:block; position:relative; margin:0 auto 4px; width:min(58vw,240px); aspect-ratio:4/5; overflow:hidden; background:#BDC2C5; border-radius:var(--r); border:1px solid var(--line); }
+  .m-portrait img{ width:100%; height:100%; object-fit:cover; object-position:center top; }
+  .hero .wrap{ margin-top:0; }
+  .profile{ margin-top:10px; padding:0; background:transparent; border:0; border-radius:0; text-align:center; }
+  .points{ display:inline-grid; text-align:left; }
+  .profile .cta{ justify-content:center; }
+  .hero .wrap > div > .kicker{ display:none; }
+  .m-kicker{ display:flex !important; justify-content:center; margin:0 0 14px; font-size:.64rem; letter-spacing:.12em; white-space:nowrap; }
+  .profile-top{ display:block; }
+  .profile-top img{ display:none; }
+  .profile .name{ font-size:1.5rem; }
 }
-.menu-note{ margin-top:20px; color:var(--soft); font-size:.92rem; }
 
-/* 교육 */
-.edu .wrap{ display:grid; gap:44px; align-items:center; }
-.edu figure{ margin:0; }
-.edu figure img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--r); }
-.edu p.body{ margin-top:16px; color:var(--soft); }
-.edu ul{ list-style:none; margin-top:24px; border-top:1px solid #EBCAD4; }
-.edu li{ padding:14px 0; border-bottom:1px solid #EBCAD4; font-weight:500; }
-.edu .ask{ margin-top:24px; color:var(--soft); }
-.edu .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
-@media (min-width:900px){ .edu .wrap{ grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:72px; } .edu figure{ order:2; } }
+/* v0.2.1 모바일 전용: 아래에 붙어 따라오는 예약 · 문의 버튼 */
+.float-cta{ display:none; }
+@media (max-width:899.98px){
+  .float-cta{ display:flex; gap:8px; position:fixed; left:0; right:0; bottom:0; z-index:60; padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px)); background:rgba(255,255,255,.82); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid var(--line); transform:translateY(110%); visibility:hidden; transition:transform .45s cubic-bezier(.2,.7,.2,1), visibility .45s; }
+  .float-cta.on{ transform:none; visibility:visible; }
+  .float-cta .btn{ flex:1; justify-content:center; height:48px; padding:0 12px; }
+  .float-cta .btn.dark{ flex:1.4; }
+  .foot{ padding-bottom:calc(56px + 72px + env(safe-area-inset-bottom,0px)); }
+}
+.hero-meta{ display:flex; flex-wrap:nowrap; gap:8px 26px; margin:30px 0 0; padding:18px 0 0; border-top:1px solid var(--line); font-size:.8rem; color:var(--soft); white-space:nowrap; }
+.hero-meta b{ font-weight:500; color:var(--ink); margin-right:6px; }
+/* v0.2.3 모바일: 4가지가 한 줄에 들어가도록 영문 위 · 한글 아래 2단 칸으로 */
+@media (max-width:599.98px){
+  .hero-meta{ display:grid; grid-template-columns:repeat(4,auto); justify-content:space-between; gap:0 6px; font-size:min(.72rem,3vw); text-align:center; line-height:1.45; }
+  .hero-meta b{ display:block; margin:0; font-size:min(.78rem,3.2vw); }
+}
+.slides{ position:relative; margin:0; aspect-ratio:4/5; overflow:hidden; background:var(--blush-soft); }
+.slides img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.04); transition:opacity 1.4s ease, transform 6s ease; }
+.slides img.on{ opacity:1; transform:scale(1); }
+.slides figcaption{ position:absolute; left:0; bottom:0; display:flex; gap:14px; padding:12px 16px; background:var(--white); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; }
+.slides figcaption span:first-child{ color:var(--soft); }
+@media (min-width:900px){ .hero .wrap{ grid-template-columns:minmax(0,760px); justify-content:center; } }
 
-/* 예약 (잉크 띠) */
-.book{ background:linear-gradient(120deg,#F8C3D4 0%,#F9CFC4 100%); color:var(--ink); padding:88px 0; }
-.book .en{ color:var(--acc); } .book .en::before{ background:var(--acc); }
-.book h2{ color:var(--acc); }
-.book .msg{ margin-top:20px; color:var(--ink); max-width:30em; }
-.book .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:30px; }
-@media (max-width:439.98px){ .book .row .btn{ flex:1 1 100%; } }
+/* 섹션 */
+.sec{ padding:clamp(72px,10vw,140px) 0; }
+#pro{ padding-top:clamp(48px,6vw,80px); }
+.sec.blush{ background:linear-gradient(180deg,var(--white) 0%,var(--blush-soft) 38%,var(--blush-soft) 70%,var(--white) 100%); }
+.sec.glow{ background:var(--grad); }
+.head{ display:grid; gap:18px; margin-bottom:clamp(36px,5vw,64px); }
+@media (min-width:900px){ .head.split{ grid-template-columns:1fr 1fr; align-items:end; gap:60px; } }
 
-/* 오시는 길 */
-.visit .wrap{ display:grid; gap:40px; }
-.info{ display:grid; gap:0; margin-top:28px; border-top:1px solid var(--line); }
-.info div{ display:grid; grid-template-columns:84px minmax(0,1fr); gap:12px; padding:16px 0; border-bottom:1px solid var(--line); }
-.info dt{ font-size:.88rem; font-weight:600; color:var(--mute); padding-top:2px; }
-.info dd{ font-size:.97rem; }
-.info dd p + p{ margin-top:6px; }
-.hours{ list-style:none; }
-.hours li{ display:flex; gap:14px; }
-.hours li b{ font-weight:500; min-width:3.6em; }
-.info .hnote{ margin-top:4px; padding-left:calc(3.492rem + 14px); font-size:.9rem; color:var(--soft); }
-.visit .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
-.map{ width:100%; height:280px; border:0; border-radius:var(--r); background:var(--bg2); display:block; }
-@media (min-width:900px){ .visit .wrap{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:64px; align-items:start; } .map{ height:100%; min-height:520px; } }
+
+.fine{ margin:16px 0 0; font-size:.78rem; color:var(--soft); }
+@media (min-width:900px){ .head.split .lead.r{ justify-self:end; text-align:right; } }
+
+.h2ko{ font-family:var(--sans); font-weight:500; font-size:clamp(1.5rem,3.4vw,2.3rem); line-height:1.35; letter-spacing:-.02em; margin-top:4px; }
+
+/* 원장 이력 6칸 (v0.2 사장님 요청: 6가지 박스) */
+/* v0.2.3 사장님 2차: 칸 크기 전부 동일 (minmax(0,1fr) = 긴 단어가 칸을 밀어내지 못함 · grid-auto-rows:1fr = 높이 동일) + 글자 축소 */
+.creds{ margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-auto-rows:1fr; background:var(--grad); border:1px solid var(--blush-2); border-radius:var(--r); overflow:hidden; }
+.creds li{ min-width:0; display:flex; flex-direction:column; gap:6px; padding:clamp(16px,2.6vw,28px) clamp(12px,2.2vw,26px); border-right:1px solid rgba(30,26,27,.1); border-bottom:1px solid rgba(30,26,27,.1); overflow-wrap:break-word; }
+.creds li:nth-child(2n){ border-right:0; }
+.creds li:nth-last-child(-n+2){ border-bottom:0; }
+.creds b{ font-family:var(--disp); font-weight:400; font-size:clamp(1rem,1.9vw,1.3rem); line-height:1.2; }
+.creds span{ font-size:clamp(.76rem,1.4vw,.84rem); line-height:1.55; }
+@media (min-width:900px){
+  .creds{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .creds li:nth-child(2n){ border-right:1px solid rgba(30,26,27,.1); }
+  .creds li:nth-child(3n){ border-right:0; }
+  .creds li:nth-last-child(-n+3){ border-bottom:0; }
+}
+
+/* 시그니처 3 (v0.2 사진 삭제 · 글 카드) */
+.sig3{ display:grid; gap:12px; }
+.sig3 article{ background:var(--white); border:1px solid var(--line); border-radius:var(--r); display:flex; flex-direction:column; }
+.sig3 .body{ flex:1; padding:clamp(16px,2vw,22px) clamp(20px,2.4vw,28px) clamp(20px,2.4vw,26px); display:flex; flex-direction:column; gap:8px; }
+.sig3 .ttl{ display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; }
+.sig3 .ttl .tag{ margin-left:0; align-self:center; }
+.sig3 .no{ font-family:var(--disp); color:var(--soft); }
+.sig3 h3{ font-family:var(--disp); font-weight:400; font-size:1.5rem; line-height:1.25; white-space:nowrap; }
+.sig3 .ttl .ko{ flex-basis:100%; display:flex; align-items:center; flex-wrap:wrap; gap:4px 10px; font-size:.86rem; color:var(--soft); line-height:1.4; }
+.sig3 p{ margin:0; font-size:.9rem; color:var(--soft); }
+.hl{ background:linear-gradient(transparent 46%, rgba(237,191,203,.6) 46%); color:inherit; padding:0 2px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+.sig3 p.em{ color:var(--ink); font-weight:500; padding-top:4px; }
+.sig3 .pr{ display:flex; justify-content:space-between; align-items:baseline; padding-top:14px; margin-top:auto; border-top:1px solid var(--line); font-family:var(--disp); font-size:1.3rem; }
+.sig3 .pr small{ font-family:var(--sans); font-size:.78rem; color:var(--soft); }
+.sig3 .pp{ display:grid; justify-items:end; gap:2px; text-align:right; }
+.sig3 .pp .was{ font-family:var(--sans); font-size:.8rem; color:var(--soft); }
+.sig3 .pp .was s{ text-decoration-thickness:1px; }
+.sig3 .pp .now{ font-family:var(--disp); font-size:1.45rem; line-height:1.1; }
+.sig3 .pp .now em{ font-style:normal; font-family:var(--sans); font-size:.76rem; font-weight:500; margin-right:6px; vertical-align:2px; padding:1px 6px; background:var(--grad); border:1px solid var(--blush-2); }
+.sig3 .pp .now small{ font-size:.78rem; color:var(--ink); }
+@media (min-width:900px){ .sig3{ grid-template-columns:repeat(3,1fr); gap:24px; } }
+
+/* 메뉴 */
+.acc{ border-top:1px solid var(--ink); }
+.acc details{ border-bottom:1px solid var(--line); }
+.acc summary{ list-style:none; display:grid; grid-template-columns:52px 1fr 22px; align-items:center; gap:8px; padding:24px 0; cursor:pointer; }
+.acc summary::-webkit-details-marker{ display:none; }
+.acc .n{ font-family:var(--disp); color:var(--soft); }
+.acc .t{ font-family:var(--disp); font-size:clamp(1.4rem,2.6vw,1.9rem); line-height:1.2; }
+.acc .t small{ display:block; font-family:var(--sans); font-size:.86rem; color:var(--soft); margin-top:4px; }
+.acc .pm{ position:relative; width:18px; height:18px; justify-self:end; }
+.acc .pm::before, .acc .pm::after{ content:""; position:absolute; left:0; right:0; top:8px; height:1px; background:var(--ink); transition:transform .3s ease; }
+.acc .pm::after{ transform:rotate(90deg); }
+.acc details[open] .pm::after{ transform:rotate(0); }
+.panel{ overflow:hidden; }
+.panel-in{ padding:0 0 30px; }
+@media (min-width:900px){ .panel-in{ padding-left:60px; } }
+.price{ margin:0; }
+.price .row{ display:grid; grid-template-columns:1fr auto; gap:6px 18px; align-items:baseline; padding:14px 0; border-bottom:1px dashed var(--line); }
+.price .row:last-child{ border-bottom:0; }
+.price dt{ font-size:.95rem; }
+.price dt small{ display:block; font-size:.82rem; color:var(--soft); }
+.price dt .en{ white-space:nowrap; }
+.price dd{ margin:0; font-family:var(--disp); font-size:1.25rem; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.price dd small{ font-family:var(--sans); font-size:.78rem; margin-left:2px; }
+/* v0.2.8 가격표 할인 표기 (시그니처 카드와 같은 형식) */
+.price dd.sale{ display:grid; justify-items:end; gap:2px; text-align:right; }
+.price dd.sale .was{ font-family:var(--sans); font-size:.78rem; color:var(--soft); }
+@media (max-width:599.98px){ .price dd.sale .now em{ display:block; width:max-content; margin:0 0 2px auto; } }
+.price dd.sale .now em{ font-style:normal; font-family:var(--sans); font-size:.72rem; font-weight:500; margin-right:6px; vertical-align:2px; padding:1px 6px; background:var(--grad); border:1px solid var(--blush-2); }
+.tag{ display:inline-block; margin-left:8px; padding:1px 8px; background:var(--grad); border:1px solid var(--blush-2); font-size:.64rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; vertical-align:2px; }
+/* v0.2.3 네이버 방문자 리뷰 (천천히 흐르는 띠, setInterval · 손 대면 멈춤) */
+.rv-wrap{ overflow:hidden; padding:6px 0 10px; }
+.rv-track{ display:flex; gap:16px; padding-right:16px; width:max-content; align-items:flex-start; will-change:transform; }
+.rv-card{ width:min(78vw,310px); flex:none; padding:20px 20px 18px; background:var(--white); border:1px solid var(--line); border-radius:var(--r); }
+.rv-top{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; font-size:.8rem; }
+.rv-top b{ font-weight:500; }
+.rv-top .star{ color:#B5536C; letter-spacing:2px; font-size:.78rem; }
+.rv-card p{ margin:0; font-size:.88rem; line-height:1.7; color:var(--ink); display:-webkit-box; -webkit-line-clamp:8; -webkit-box-orient:vertical; overflow:hidden; }
+.rv-src{ display:inline-block; margin-top:12px; font-size:.72rem; letter-spacing:.06em; color:var(--soft); }
+.rv-more{ margin-top:22px; }
+
+/* Academy */
+.aca-top{ display:grid; gap:36px; margin-bottom:clamp(40px,6vw,72px); }
+.aca-top figure{ margin:0; }
+.aca-top img{ width:100%; aspect-ratio:auto; object-fit:cover; }
+@media (min-width:900px){ .aca-top{ grid-template-columns:1.2fr .8fr; gap:80px; align-items:end; } }
+/* 수강 코스 3 (v0.2) */
+.aca-label{ margin-bottom:18px; }
+.aca{ display:grid; border-top:1px solid var(--ink); }
+.aca article{ padding:28px 0; border-bottom:1px solid var(--line); }
+.aca .no{ font-family:var(--disp); color:var(--soft); }
+.aca h3{ font-family:var(--sans); font-weight:500; font-size:clamp(1.15rem,2vw,1.35rem); line-height:1.4; margin-top:10px; }
+.aca h3 small{ display:block; font-size:.9rem; font-weight:400; color:var(--soft); margin-top:6px; }
+.aca p{ margin:14px 0 0; font-size:.9rem; }
+@media (min-width:900px){ .aca{ grid-template-columns:repeat(3,1fr); } .aca article{ padding:32px 32px 36px 0; border-bottom:0; } .aca article + article{ padding-left:32px; border-left:1px solid var(--line); } }
+
+/* Visit */
+.visit{ display:grid; gap:44px; }
+.info{ margin:0; border-top:1px solid var(--ink); }
+.info .row{ display:grid; grid-template-columns:96px 1fr; gap:14px; padding:18px 0; border-bottom:1px solid var(--line); }
+.info dt{ font-size:.72rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; padding-top:3px; }
+.info dt small{ display:block; letter-spacing:0; text-transform:none; color:var(--soft); font-weight:400; font-size:.8rem; }
+.info dd{ margin:0; font-size:.92rem; }
+.info dd p{ margin:0 0 8px; }
+.info dd p:last-child{ margin:0; }
+.info .en{ display:block; color:var(--soft); font-size:.84rem; }
+.hours{ display:grid; grid-template-columns:auto 1fr; gap:2px 18px; font-variant-numeric:tabular-nums; }
+.links{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.links a{ display:flex; flex-direction:column; justify-content:space-between; min-height:92px; padding:14px 16px; border:1px solid var(--line); background:var(--white); transition:background .3s ease, border-color .3s ease; }
+.links a b{ font-weight:500; font-size:.88rem; }
+.links a span{ font-size:.78rem; color:var(--soft); }
+.links a.main{ background:var(--ink); color:var(--white); border-color:var(--ink); }
+.links a.main span{ color:#D3CDCF; }
+@media (hover:hover){ .links a:hover{ background:var(--grad); border-color:var(--blush-2); } .links a.main:hover{ color:var(--ink); } .links a.main:hover span{ color:var(--soft); } }
+.links a.main{ grid-column:1/-1; min-height:80px; }
+.mapframe{ width:100%; height:340px; border:0; border-radius:var(--r); }
+@media (min-width:900px){ .visit{ grid-template-columns:1fr 1fr; gap:64px; align-items:start; } .visit .links{ margin-top:0; } .mapframe{ grid-column:1/-1; height:400px; } }
 
 /* 푸터 */
-.foot{ background:var(--wash); padding:56px 0 120px; font-size:.88rem; color:var(--soft); border-top:1px solid var(--line); }
-.foot .logo{ width:110px; margin-bottom:18px; }
-.foot p + p{ margin-top:6px; }
-@media (min-width:900px){ .foot{ padding-bottom:56px; } }
+.foot{ border-top:1px solid var(--line); padding:44px 0 56px; font-size:.82rem; color:var(--soft); background:linear-gradient(180deg,var(--white) 0%,var(--blush-soft) 100%); }
+.foot .wrap{ display:grid; gap:18px; }
+.foot .brand{ color:var(--ink); font-size:1.6rem; }
+.foot p{ margin:0; }
+.foot nav{ display:flex; flex-wrap:wrap; gap:6px 20px; }
+.foot nav a{ color:var(--ink); border-bottom:1px solid var(--blush-2); }
+@media (min-width:900px){ .foot .wrap{ grid-template-columns:auto 1fr auto; align-items:end; gap:50px; } }
 
-/* 모바일 하단 바 */
-.quick{ position:fixed; left:0; right:0; bottom:0; z-index:60; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:6px; padding:8px 10px calc(8px + env(safe-area-inset-bottom)); background:#FFFFFF; border-top:1px solid var(--line); }
-.quick a{ display:flex; align-items:center; justify-content:center; min-height:48px; border-radius:var(--r); font-size:.86rem; font-weight:600; text-decoration:none; text-align:center; border:1.5px solid var(--acc); color:var(--acc); }
-.quick a.fill{ background:var(--acc); color:#FFFFFF; }
-@media (min-width:900px){ .quick{ display:none; } }
+/* v0.2.5 모바일: 섹션 간 여백 축소 */
+@media (max-width:899.98px){
+  .sec{ padding:36px 0; }
+  .head{ margin-bottom:24px; }
+  #pro{ padding-top:28px; }
+  .hero{ padding-bottom:20px; }
+}
 
-/* 나타나기 */
-.js .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease var(--d,0s), transform .7s ease var(--d,0s); }
+/* 리빌 (v0.2 · 화면 아래 22% 선을 넘어야 나타남 → 섹션에 들어서기 전엔 아래 내용이 비어 있음) */
+.js .reveal{ opacity:0; transform:translateY(42px); transition:opacity 1s ease, transform 1s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0s); }
 .js .reveal.in{ opacity:1; transform:none; }
+@media print{ .js .reveal{ opacity:1; transform:none; } }
+
+/* ── 미모부심 v0.3 추가 (우호뷰티 형식 이식) */
+.nw{ white-space:nowrap; }
+.brand img{ display:block; height:32px; width:auto; }
+.foot .brand img{ height:40px; }
+/* 900 미만 섹션 바로가기 (R-5) */
+.snav{ display:flex; border-top:1px solid var(--line); }
+.snav a{ flex:1 1 0; display:flex; align-items:center; justify-content:center; min-height:40px; font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); white-space:nowrap; }
+@media (min-width:900px){ .snav{ display:none; } }
+@media (hover:hover){ .snav a:hover{ color:var(--ink); } }
+html{ scroll-behavior:auto; scroll-padding-top:120px; }
+@media (min-width:900px){ html{ scroll-padding-top:80px; } }
+[tabindex="-1"]:focus{ outline:none; }
+/* 시그니처 2장 */
+@media (min-width:900px){ .sig3.two{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.sig3 .pp .now + .now{ margin-top:2px; }
+.pn-lead{ margin:24px 0 0; font-size:1.08rem; font-weight:500; color:var(--ink); }
+.hnote{ margin:8px 0 0 !important; font-size:.84rem; color:var(--soft); }
+.aca + .fine{ margin-top:20px; }
 </style>
+<noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap bar">
+<header class="site-head">
+  <div class="wrap">
     <a class="brand" href="#top" aria-label="미모부심 처음으로"><img src="mm-logo.svg" alt="미모부심" width="104" height="37" /></a>
     <nav class="nav" aria-label="주요 메뉴">
-      <a href="#about">소개</a>
-      <a href="#price">가격</a>
-      <a href="#academy">교육</a>
-      <a href="#booking">예약 안내</a>
-      <a href="#visit">오시는 길</a>
+      <a href="#signature">Signature</a><a href="#reviews">Reviews</a><a href="#menu">Menu</a><a href="#academy">Academy</a><a href="#visit">Visit</a>
     </nav>
-    <a class="btn fill" href="tel:050713680878">전화 예약</a>
+    <a class="btn dark" href="tel:050713680878">전화 예약</a>
   </div>
   <nav class="snav" aria-label="섹션 바로가기">
-    <a href="#about">소개</a>
-    <a href="#price">가격</a>
-    <a href="#academy">교육</a>
-    <a href="#booking">예약 안내</a>
-    <a href="#visit">오시는 길</a>
+    <a href="#signature">Signature</a><a href="#reviews">Reviews</a><a href="#menu">Menu</a><a href="#academy">Academy</a><a href="#visit">Visit</a>
   </nav>
 </header>
 
 <main id="top">
-  <section class="hero" aria-label="미모부심">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <p class="label kicker m-kicker" aria-hidden="true">Waxing &amp; Head Spa · Juyeop, Ilsan</p>
+    <figure class="m-portrait"><img src="mm-owner-lg.webp" alt="미모부심 김유지 원장" width="900" height="1125" fetchpriority="high" /></figure>
     <div class="wrap">
-      <div>
-        <p class="label">LYCON 인증 교육기관</p>
-        <h1><img src="mm-logo.svg" alt="미모부심" width="360" height="129" /></h1>
-        <p class="tag">"당신의 미모가 <span class="nw">눈부셔 질때까지"</span></p>
-        <p class="sub">일산에서 10년째 에스테틱을 운영중이며<br />현) 라이콘 인증 교육 강사가 운영하는 샵</p>
-        <p class="care">왁싱 · 헤드스파 · 피부 · 바디 · 반영구 · 속눈썹펌</p>
-        <div class="cta3">
-          <a class="btn fill" href="tel:050713680878">전화 <span class="nw">0507-1368-0878</span></a>
-          <a class="btn" href="sms:01075960878">문자 문의</a>
-          <a class="btn" href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">인스타그램</a>
+      <div class="reveal">
+        <p class="label kicker">Waxing &amp; Head Spa · Juyeop, Ilsan</p>
+        <div class="profile">
+          <div class="profile-top">
+            <img src="mm-owner.webp" alt="미모부심 김유지 원장 프로필 사진" width="480" height="640" />
+            <div>
+              <p class="name">김유지<small>원장</small></p>
+              <p class="cred">[LYCON 인증 교육 강사 | <span class="nw">자디니스파 총괄교육센터]</span></p>
+            </div>
+          </div>
+          <h1 id="hero-h">"당신의 미모가<br />눈부셔 질때까지"</h1>
+          <ul class="points">
+            <li>빠르고 안아픈 "퀵 브라질리언" 시술</li>
+            <li>왁싱 · 헤드스파 · 피부 · 바디 · <span class="nw">반영구 · 속눈썹펌</span></li>
+            <li>왁싱/피부 수강 전문 <span class="nw">(1day / 3day /master)</span></li>
+          </ul>
+          <div class="cta">
+            <a class="btn dark" href="tel:050713680878">전화 예약</a>
+            <a class="btn blush" href="sms:01075960878">문자 문의</a>
+          </div>
         </div>
-      </div>
-      <figure>
-        <img src="mm-hero.webp" alt="미모부심 매장 입구와 간판" width="1000" height="1213" fetchpriority="high" />
-      </figure>
-    </div>
-  </section>
-
-  <section class="sec alt about" id="about" aria-labelledby="about-h">
-    <div class="wrap">
-      <figure class="reveal"><img src="mm-front.webp" alt="미모부심 안내데스크와 LYCON 간판" width="720" height="720" loading="lazy" /></figure>
-      <div>
-        <p class="en reveal">About</p>
-        <h2 id="about-h" class="reveal">친절하고 꼼꼼하게 <span class="nw">고객님을 응대해 드립니다.</span></h2>
-        <p class="body reveal">미모부심은 프라이빗 ROOM 6개로 1인 케어룸, 커플룸이 있으며, 모든룸 전동베드, 개별룸 냉난방기, 개별룸 샤워실, 1회용 제품 사용으로 위생적이고 청결한 케어를 받으실 수 있습니다.</p>
-        <ul class="facts">
-          <li class="reveal">프라이빗 ROOM 6개</li>
-          <li class="reveal">1인 케어룸 · 커플룸</li>
-          <li class="reveal">모든룸 전동베드</li>
-          <li class="reveal">개별룸 냉난방기</li>
-          <li class="reveal">개별룸 샤워실</li>
-          <li class="reveal">1회용 제품 사용</li>
-        </ul>
+        <p class="hero-meta"><span><b>Waxing</b>왁싱</span><span><b>Head Spa</b>헤드스파</span><span><b>Skin</b>피부</span><span><b>Body</b>바디</span></p>
+        <p class="fine">* 문자 or 전화로 성함과 시술항목 보내주시면 확인 후 순차적으로 안내 도와드리고 있습니다.</p>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="price" aria-labelledby="price-h">
+  <section class="sec" id="pro" aria-labelledby="pro-h">
     <div class="wrap">
-      <p class="en reveal">Price</p>
-      <h2 id="price-h" class="reveal">가격표</h2>
-      <p class="lead reveal">빠르고 안아픈 "퀵 브라질리언" 시술</p>
-      <div class="menu">
-        <article class="mcard m-wax reveal">
-          <h3><b>Waxing</b><small>왁싱</small></h3>
-          <ul>
-            <li><span><em>첫방문</em>(여)브라질리언</span><b>49,000원</b></li>
-            <li><span><em>첫방문</em>(남)브라질리언</span><b>60,000원</b></li>
-          </ul>
-          <p class="note">트리트먼트팩+인그로운제거 서비스</p>
-          <p class="sub-h">왁싱시</p>
-          <ul>
-            <li><span>벨리테라피 복부케어</span><b>39,000원</b></li>
-            <li><span>페이스튠 피부케어</span><b>39,000원</b></li>
-          </ul>
-          <div class="ph"><img src="mm-wax.webp" alt="라이콘 왁싱 진정젤 준비 과정" width="480" height="854" loading="lazy" /></div>
-        </article>
-        <article class="mcard m-lash reveal">
-          <h3><b>Lash</b><small>속눈썹</small></h3>
-          <ul>
-            <li><span>수분뷰러펌</span><b>35,000원</b></li>
-          </ul>
-          <div class="ph"><img src="mm-lash.webp" alt="속눈썹펌 후 눈매 클로즈업" width="503" height="503" loading="lazy" /></div>
-        </article>
-        <article class="mcard m-head reveal">
-          <h3><b>Head Spa</b><small>헤드스파</small></h3>
-          <ul>
-            <li><span><em>첫방문</em>헤드스파</span><b>39,000원</b></li>
-          </ul>
-        </article>
-        <article class="mcard m-face reveal">
-          <h3><b>Face</b><small>페이스</small></h3>
-          <ul>
-            <li><span>미백케어</span><b>60,000원</b></li>
-            <li><span>썬번 수분케어</span><b>60,000원</b></li>
-          </ul>
-        </article>
-        <article class="mcard m-body reveal">
-          <h3><b>Body</b><small>바디</small></h3>
-          <ul>
-            <li><span>부위별 슬리밍</span><b>60,000원</b></li>
-            <li><span>슬리밍3+포톤3+빼라피3</span><b>360,000원</b></li>
-            <li><span><span class="nw">누워서 살빼자</span> 바이오포톤&amp;빼라피</span><b>60,000원</b></li>
-            <li><span><span class="nw">알라딘필링 공식전문점</span> 등드름 케어</span><b>99,000원</b></li>
-          </ul>
-        </article>
+      <div class="head reveal">
+        <p class="label">Esthetic Professional<span class="ko">원장 소개</span></p>
+        <h2 id="pro-h" class="h2ko">친절하고 꼼꼼하게<br />고객님을 응대해 드립니다.</h2>
       </div>
-      <p class="menu-note reveal">네이버 플레이스 가격표 기준이에요. 이벤트 가격은 인스타그램 공지를 확인해 주세요.</p>
+      <ul class="creds reveal">
+        <li><b>LYCON Trainer</b><span>현) 라이콘 인증 <span class="nw">교육 강사</span></span></li>
+        <li><b>Certified Academy</b><span>LYCON 인증 교육기관</span></li>
+        <li><b>Jardini Spa</b><span>자디니스파 총괄교육센터</span></li>
+        <li><b>10 Years in Ilsan</b><span>일산에서 10년째 <span class="nw">에스테틱 운영</span></span></li>
+        <li><b>Private Room</b><span>프라이빗 ROOM 6개 · 1인 케어룸 · 커플룸</span></li>
+        <li><b>Awards &amp; Judge</b><span>각종 미용대회 심사위원 <span class="nw">위촉 및 수상</span></span></li>
+      </ul>
     </div>
   </section>
 
-  <section class="sec alt edu" id="academy" aria-labelledby="edu-h">
+  <section class="sec blush" id="signature" aria-labelledby="sig-h">
     <div class="wrap">
-      <figure class="reveal"><img src="mm-lycon.webp" alt="라이콘코리아 본사공식인증살롱 스티커" width="600" height="432" loading="lazy" /></figure>
-      <div>
-        <p class="en reveal">Academy</p>
-        <h2 id="edu-h" class="reveal">잘하는 기술을 넘어, <span class="nw">잘되는 샵을 만드는 교육.</span></h2>
-        <p class="body reveal">미모부심은 풍부한 실무 경험을 바탕으로 고객에게는 섬세하고 완성도 높은 시술을, 수강생에게는 현장에서 바로 활용할 수 있는 실질적인 교육을 제공합니다.</p>
-        <p class="body reveal">단순히 기술을 배우는 것을 넘어 고객 상담부터 시술 노하우, 샵 운영에 필요한 실전 경쟁력까지 함께 전달합니다.</p>
-        <ul>
-          <li class="reveal">LYCON 인증 트레이너 교육센터</li>
-          <li class="reveal">왁싱/피부 수강 전문 <span class="nw">(1day / 3day /master)</span></li>
-        </ul>
-        <p class="ask reveal">미모부심의 교육 내용과 비용이 궁금하다면 DM에 <span class="nw">•수강안내•</span> 를 보내주세요.</p>
-        <div class="row reveal">
-          <a class="btn" href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">인스타그램 DM</a>
-          <a class="btn" href="tel:01075960878">수강문의 <span class="nw">010-7596-0878</span></a>
+      <div class="head split reveal">
+        <div>
+          <p class="label">Signature<span class="ko">시그니처</span></p>
+          <h2 id="sig-h" class="h2ko">미모부심 시그니처 메뉴</h2>
         </div>
+        <p class="lead r">퀵 브라질리언 · 자디니 헤드스파<br class="m-br" /> 첫 방문 가격으로 안내해 드려요.</p>
+      </div>
+      <div class="sig3 two">
+        <article class="reveal">
+          <div class="body">
+            <div class="ttl"><span class="no">01</span><h3 lang="en">Quick Brazilian</h3><span class="ko">퀵 브라질리언 왁싱<span class="tag">Signature</span></span></div>
+            <p>고객님 한분한분 1:1 맞춤 관리로 진행합니다.</p>
+            <p>1회용 제품 사용으로 위생적이고 청결한 케어를 받으실 수 있습니다.</p>
+            <p class="em">트리트먼트팩+인그로운제거 서비스</p>
+            <div class="pr"><small>첫방문</small><div class="pp"><span class="now"><em>여</em>49,000<small>원</small></span><span class="now"><em>남</em>60,000<small>원</small></span></div></div>
+          </div>
+        </article>
+        <article class="reveal">
+          <div class="body">
+            <div class="ttl"><span class="no">02</span><h3 lang="en">Head Spa</h3><span class="ko">자디니 헤드스파<span class="tag">Signature</span></span></div>
+            <p>일산 미모부심 × 자디니스파</p>
+            <p>라이콘 왁싱 헤드스파 · 아로마 · 피부 및 바디 케어까지.</p>
+            <p class="em">왁싱시 벨리테라피 복부케어 · <span class="nw">페이스튠 피부케어</span></p>
+            <div class="pr"><small>첫방문</small><div class="pp"><span class="now">39,000<small>원</small></span></div></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="book" id="booking" aria-labelledby="book-h">
+  <section class="sec" id="reviews" aria-labelledby="rv-h">
     <div class="wrap">
-      <p class="en reveal">Booking</p>
-      <h2 id="book-h" class="reveal">예약 및 문의</h2>
-      <p class="msg reveal">문자 or 전화로 성함과 시술항목 보내주시면 확인 후 순차적으로 안내 도와드리고 있습니다. 시술 중에는 바로 답장이 어려울 수 있으니 조금만 기다려주세요.</p>
-      <div class="row reveal">
-        <a class="btn fill" href="tel:050713680878">전화 <span class="nw">0507-1368-0878</span></a>
-        <a class="btn" href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">인스타그램</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec visit" id="visit" aria-labelledby="visit-h">
-    <div class="wrap">
-      <div>
-        <p class="en reveal">Visit</p>
-        <h2 id="visit-h" class="reveal">오시는 길</h2>
-        <dl class="info reveal">
-          <div><dt>주소</dt><dd><p>경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span></p></dd></div>
-          <div><dt>찾아가는 길</dt><dd><p>주엽역 그랜드 백화점 건너편 7번 출구 앞 다이소 주엽점 건물 2층으로 오시면 됩니다.</p><p>3호선 주엽역 7번출구에서 도보1분</p><p>주엽역 버스 중앙차로에서 도보5분</p></dd></div>
-          <div><dt>주차</dt><dd><p>주차공간 여유(무료주차)</p><p>네비게이션에 다이소 주엽점 입력하시고 삼희프라자에 주차하시면 됩니다.</p></dd></div>
-          <div><dt>영업시간</dt><dd>
-            <ul class="hours">
-              <li><b>월–토</b><span class="nw">10:00 - 22:30</span></li>
-              <li><b>일</b><span>정기휴무 <span class="nw">(매주 일요일)</span></span></li>
-            </ul>
-            <p class="hnote">일요일은 예약제로 운영합니다.</p>
-          </dd></div>
-          <div><dt>전화</dt><dd><p><a href="tel:050713680878" class="nw">0507-1368-0878</a></p></dd></div>
-        </dl>
-        <div class="row reveal">
-          <a class="btn" href="tel:050713680878">전화 예약</a>
-          <a class="btn" href="https://map.naver.com/p/entry/place/1764735148" target="_blank" rel="noopener">네이버 길찾기</a>
+      <div class="head split reveal">
+        <div>
+          <p class="label">Reviews<span class="ko">네이버 방문자 리뷰</span></p>
+          <h2 id="rv-h" class="h2ko">다녀가신 분들의 이야기</h2>
         </div>
+        <p class="lead r">네이버 플레이스에 남겨주신 실제 방문자 리뷰예요.<br class="m-br" /> 닉네임은 일부만 표시했어요.</p>
       </div>
-      <iframe class="map reveal" title="미모부심 위치 지도" src="https://www.google.com/maps?q=%EA%B2%BD%EA%B8%B0+%EA%B3%A0%EC%96%91%EC%8B%9C+%EC%9D%BC%EC%82%B0%EC%84%9C%EA%B5%AC+%EA%B0%95%EC%84%B1%EB%A1%9C+121&amp;z=17&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="rv-wrap reveal" id="rv-wrap" aria-label="네이버 방문자 리뷰, 자동으로 흐름 · 누르고 있으면 멈춤">
+      <div class="rv-track" id="rv-track">
+        <article class="rv-card"><div class="rv-top"><b>Ju*********</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>💆‍♀️ 커스텀 헤드스파 받고 왔어요. 💆‍♀️ 관리 전에 두피를 확대해서 보여주셨는데 붉은 기가 많이 보인다고 하셔서 조금 놀랐어요. 💆‍♀️ 평소 제 두피 상태를 자세히 볼 일이 없었는데 신기하더라고요. 💆‍♀️ 샴푸부터 두피 마사지, 기기를 이용한 관리까지 꼼꼼하게 해주셔서 정말 편안했어요. 💆‍♀️ 관리받는 동안 힐링하는 기분이었고, 끝나고 나니 두피도 한결 개운하게 느껴졌어요. 💆‍♀️ 매장도 깔끔하고 분위기가 아늑해서 좋았습니다. 💆‍♀️ 다음에 또 관리받으러 가고 싶어요.</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+        <article class="rv-card"><div class="rv-top"><b>gi*****</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>N번째 임산부 왁싱 입니다. 받았던 왁싱 중 가장 꼼꼼하고 덜 아프게 해주시고 정말 친절하세요!! 라이콘 왁싱 수강으로 유명한 5년 이상 된 왁싱 선생님들이 해주는 곳이라 그런지 처음 설명부터 전문적이고 너무너무 꼼꼼해서 왁싱 경험 젤 만족한 왁싱을 받고 가는 것 같네요 임산부들, 일반 손님들에게 강추한 왁싱 샵입니당 !! 정말 감사합니다 🩷</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+        <article class="rv-card"><div class="rv-top"><b>BE*******</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>브라질리언 왁싱 처음부터 끝까지 너무 만족스러웠어요! 😊 걱정했던 것과 달리 하나도 안 아프게 꼼꼼하고 편안하게 해주셔서 정말 좋았습니다. 실장님도 너무 친절하시고 센스까지 최고세요👍 두번째 방문인데 넘넘 만족 이에요 실력도 서비스도 모두 만족합니다! 다음에도 무조건 여기로 올게요. 소영실장님 최고입니다!! ❤️</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+        <article class="rv-card"><div class="rv-top"><b>오단*</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>헤드스파는 처음 받아봤는데 개인두피 상태에 맞게 상담해주시고 두피상태에 맞는 오일로 맞춰서 시술해주셔서 비포, 에프터가 확실하게 느껴졌어요! 어깨와 목도 같이 마사지 해주시는데 받고나니 너무 개운 했어요! 친절하고 꼼꼼하게 시술해주셔서 감사합니다🩷</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+        <article class="rv-card"><div class="rv-top"><b>천사*****</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>원장님이 정말 친절해요. 상담도 개인에 맞게 잘해주시고 편안하게 해주시네요. 헤드스파 받았는데 정확히 진단해주시고 받고나니 너무 개운 했어요. 어깨와 얼굴도 같이해주시는데 정말 부드럽게 잘해주시네요. 잘 받고 왔어요. 또 방문할게요^^</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+        <article class="rv-card"><div class="rv-top"><b>환영**</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>임산부 왁싱 검색해서 왔었는데 벌써 세번째 왁싱에 원장님께도 받아보고 으니쌤 소영쌤께도 시술 받아보았어요!! 다들 손이 빠르시고 엄청 꼼꼼하신것같아요! 최고최고… 아프지 않을수 없지만 친절하시고 다들 너무 따뜻하게 대해주셔서 상대적으로 덜 아프게 느끼고 가는것같아요! 항상 만족하고 갑미다💗 임산부 왁싱으로 추천드려요요</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+        <article class="rv-card"><div class="rv-top"><b>일산***</b><span class="star" aria-label="별점 5점">★★★★★</span></div><p>왁싱은 역시 누가 해주느냐가 중요한 것 같아요 소영쌤 덕분에 편안하게 시술받고 갑니다! 꼼꼼하게 잘해주시고 중간중간 세심하게 신경 써주셔서 믿고 맡길 수 있었어요. 실력도 좋으시고 분위기도 편안해서 부담 없이 받을 수 있었습니다. 괜히 왁싱 잘하는 곳 찾으려고 여기저기 돌아다닐 필요가 없네요 앞으로도 꾸준히 방문하겠습니다. 소영쌤 추천합니다!</p><span class="rv-src">네이버 방문자 리뷰</span></article>
+      </div>
+    </div>
+    <div class="wrap rv-more reveal"><a class="btn line" href="https://m.place.naver.com/place/1764735148/review/visitor" target="_blank" rel="noopener">리뷰 더 보기 <small>네이버 플레이스</small></a></div>
+  </section>
+
+  <section class="sec blush" id="menu" aria-labelledby="menu-h">
+    <div class="wrap">
+      <div class="head split reveal">
+        <div>
+          <p class="label">Menu<span class="ko">가격</span></p>
+          <h2 id="menu-h" style="margin-top:20px">Price list.<span class="ko-t">시술 가격 안내</span></h2>
+        </div>
+        <p class="lead r">네이버 플레이스 가격표 기준이에요.<br class="m-br" /> 이벤트 가격은 인스타그램 공지를 <span class="nw">확인해 주세요.</span></p>
+      </div>
+      <div class="acc reveal">
+        <details open>
+          <summary><span class="n">i.</span><span class="t">Waxing<small>왁싱</small></span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="panel"><div class="panel-in">
+            <dl class="price">
+              <div class="row"><dt><span class="en">(여)브라질리언<span class="tag">Signature</span></span><small>첫방문</small></dt><dd>49,000<small>원</small></dd></div>
+              <div class="row"><dt><span class="en">(남)브라질리언<span class="tag">Signature</span></span><small>첫방문</small></dt><dd>60,000<small>원</small></dd></div>
+              <div class="row"><dt>트리트먼트팩+인그로운제거<small>왁싱 시</small></dt><dd>서비스</dd></div>
+            </dl>
+          </div></div>
+        </details>
+        <details>
+          <summary><span class="n">ii.</span><span class="t">Head Spa<small>헤드스파</small></span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="panel"><div class="panel-in">
+            <dl class="price">
+              <div class="row"><dt><span class="en">헤드스파<span class="tag">Signature</span></span><small>첫방문</small></dt><dd>39,000<small>원</small></dd></div>
+              <div class="row"><dt>벨리테라피 복부케어<small>왁싱시</small></dt><dd>39,000<small>원</small></dd></div>
+              <div class="row"><dt>페이스튠 피부케어<small>왁싱시</small></dt><dd>39,000<small>원</small></dd></div>
+            </dl>
+          </div></div>
+        </details>
+        <details>
+          <summary><span class="n">iii.</span><span class="t">Face &amp; Lash<small>페이스 · 속눈썹</small></span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="panel"><div class="panel-in">
+            <dl class="price">
+              <div class="row"><dt>미백케어<small>페이스</small></dt><dd>60,000<small>원</small></dd></div>
+              <div class="row"><dt>썬번 수분케어<small>페이스</small></dt><dd>60,000<small>원</small></dd></div>
+              <div class="row"><dt>등드름 케어<small>알라딘필링 공식전문점</small></dt><dd>99,000<small>원</small></dd></div>
+              <div class="row"><dt>수분뷰러펌<small>속눈썹</small></dt><dd>35,000<small>원</small></dd></div>
+            </dl>
+          </div></div>
+        </details>
+        <details>
+          <summary><span class="n">iv.</span><span class="t">Body<small>바디</small></span><span class="pm" aria-hidden="true"></span></summary>
+          <div class="panel"><div class="panel-in">
+            <dl class="price">
+              <div class="row"><dt>부위별 슬리밍</dt><dd>60,000<small>원</small></dd></div>
+              <div class="row"><dt>슬리밍3+포톤3+빼라피3</dt><dd>360,000<small>원</small></dd></div>
+              <div class="row"><dt>바이오포톤&amp;빼라피<small>누워서 살빼자</small></dt><dd>60,000<small>원</small></dd></div>
+            </dl>
+          </div></div>
+        </details>
+      </div>
     </div>
   </section>
+
+  <section class="sec blush" id="academy" aria-labelledby="academy-h">
+    <div class="wrap">
+      <div class="aca-top">
+        <div class="reveal">
+          <p class="label">Academy<span class="ko">왁싱 · 피부 교육</span></p>
+          <h2 id="academy-h" style="margin-top:20px">LYCON<br />Certified Academy.<span class="ko-t">LYCON 인증 교육기관 · 자디니스파 총괄교육센터</span></h2>
+          <p class="pn-lead">잘하는 기술을 넘어, <span class="nw">잘되는 샵을 만드는 교육.</span></p>
+          <p class="lead" style="margin-top:14px">미모부심은 풍부한 실무 경험을 바탕으로 고객에게는 섬세하고 완성도 높은 시술을, 수강생에게는 현장에서 바로 활용할 수 있는 실질적인 교육을 제공합니다. 단순히 기술을 배우는 것을 넘어 고객 상담부터 시술 노하우, 샵 운영에 필요한 실전 경쟁력까지 함께 전달합니다.</p>
+          <div class="cta" style="margin-top:30px">
+            <a class="btn dark" href="tel:01075960878">수강문의 <small>010-7596-0878</small></a>
+            <a class="btn line" href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">Instagram <small>DM</small></a>
+          </div>
+        </div>
+        <figure class="reveal"><img loading="lazy" src="mm-lycon.webp" alt="라이콘코리아 본사공식인증살롱 스티커" width="600" height="432" /></figure>
+      </div>
+      <p class="label aca-label reveal">Courses<span class="ko">수강 코스</span></p>
+      <div class="aca">
+        <article class="reveal">
+          <span class="no">01</span>
+          <h3>1day<small>왁싱/피부 수강</small></h3>
+        </article>
+        <article class="reveal">
+          <span class="no">02</span>
+          <h3>3day<small>왁싱/피부 수강</small></h3>
+        </article>
+        <article class="reveal">
+          <span class="no">03</span>
+          <h3>master<small>왁싱/피부 수강</small></h3>
+        </article>
+      </div>
+      <p class="fine reveal">미모부심의 교육 내용과 비용이 궁금하다면 DM에 <span class="nw">•수강안내•</span> 를 보내주세요.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="visit" aria-labelledby="visit-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="label">Visit<span class="ko">오시는 길</span></p>
+        <h2 id="visit-h">Find us in Juyeop.<span class="ko-t">주엽역 7번 출구 앞 다이소 주엽점 건물 2층</span></h2>
+      </div>
+      <div class="visit">
+        <div class="reveal">
+          <dl class="info">
+            <div class="row"><dt>Address<small>주소</small></dt><dd><p>경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span></p></dd></div>
+            <div class="row"><dt>Way<small>찾아가는 길</small></dt><dd><p>주엽역 그랜드 백화점 건너편 7번 출구 앞 다이소 주엽점 건물 2층으로 <span class="nw">오시면 됩니다.</span></p><p>3호선 주엽역 <span class="nw">7번출구에서 도보1분</span></p><p>주엽역 버스 <span class="nw">중앙차로에서 도보5분</span></p></dd></div>
+            <div class="row"><dt>Parking<small>주차</small></dt><dd><p>주차공간 여유(무료주차)</p><p>네비게이션에 다이소 주엽점 입력하시고 삼희프라자에 <span class="nw">주차하시면 됩니다.</span></p></dd></div>
+            <div class="row"><dt>Hours<small>영업시간</small></dt><dd><div class="hours"><span>월–토</span><span>10:00 – 22:30</span><span>일</span><span>정기휴무 <span class="nw">(매주 일요일)</span></span></div><p class="hnote">일요일은 예약제로 운영합니다.</p></dd></div>
+            <div class="row"><dt>Tel<small>전화</small></dt><dd><p><a href="tel:050713680878">0507-1368-0878</a></p><p>시술예약 / 수강문의 <a href="tel:01075960878" class="nw">010-7596-0878</a></p></dd></div>
+          </dl>
+        </div>
+        <div class="reveal">
+          <nav class="links" aria-label="예약 · 문의 링크">
+            <a class="main" href="tel:050713680878"><b>Call</b><span>전화 예약 0507-1368-0878</span></a>
+            <a href="sms:01075960878"><b>Message</b><span>문자 문의</span></a>
+            <a href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener"><b>Instagram</b><span>@_mimoboosim_</span></a>
+            <a href="https://map.naver.com/p/entry/place/1764735148" target="_blank" rel="noopener"><b>Naver Map</b><span>네이버 길찾기</span></a>
+            <a href="https://blog.naver.com/mimoboosim" target="_blank" rel="noopener"><b>Blog</b><span>네이버 블로그</span></a>
+          </nav>
+        </div>
+        <iframe class="mapframe reveal" src="https://www.google.com/maps?q=%EA%B2%BD%EA%B8%B0+%EA%B3%A0%EC%96%91%EC%8B%9C+%EC%9D%BC%EC%82%B0%EC%84%9C%EA%B5%AC+%EA%B0%95%EC%84%B1%EB%A1%9C+121&amp;z=17&amp;output=embed" title="미모부심 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<nav class="float-cta" id="float-cta" aria-label="빠른 예약 · 문의">
+  <a class="btn dark" href="tel:050713680878">전화 예약</a>
+  <a class="btn blush" href="sms:01075960878">문자 문의</a>
+</nav>
 
 <footer class="foot">
   <div class="wrap">
-    <img class="logo" src="mm-logo.svg" alt="미모부심" width="110" height="39" loading="lazy" />
-    <p>미모부심 · 경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span> · <a href="tel:050713680878" class="nw">0507-1368-0878</a></p>
-    <p><a href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">@_mimoboosim_</a> · <a href="https://blog.naver.com/mimoboosim" target="_blank" rel="noopener">블로그</a> · <a href="https://smartstore.naver.com/mimoboosim" target="_blank" rel="noopener">스마트스토어</a> · <a href="https://m.place.naver.com/place/1764735148/home" target="_blank" rel="noopener">네이버 플레이스</a></p>
-    <p>© MIMOBOOSIM</p>
+    <span class="brand"><img src="mm-logo.svg" alt="미모부심" width="110" height="39" loading="lazy" /></span>
+    <div>
+      <p>미모부심 · LYCON 인증 교육기관 · 자디니스파 총괄교육센터</p>
+      <p>경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span></p>
+      <p>© MIMOBOOSIM</p>
+    </div>
+    <nav aria-label="푸터 링크"><a href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">Instagram</a><a href="https://blog.naver.com/mimoboosim" target="_blank" rel="noopener">Blog</a><a href="https://smartstore.naver.com/mimoboosim" target="_blank" rel="noopener">Store</a><a href="https://m.place.naver.com/place/1764735148/home" target="_blank" rel="noopener">Naver</a><a href="#top">Top</a></nav>
   </div>
 </footer>
 
-<nav class="quick" aria-label="빠른 연결">
-  <a class="fill" href="tel:050713680878">전화 예약</a>
-  <a href="sms:01075960878">문자</a>
-  <a href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener">인스타</a>
-</nav>
-
 <script>
 (function(){
-  var pending=[].slice.call(document.querySelectorAll('.reveal'));
-  pending.forEach(function(el){
+  /* 나타나기(우호뷰티 방식): 윗변이 화면 78% 선을 넘으면 표시 · setInterval 구동(강제 재생) · 바닥 도달 시 전부 표시 */
+  var items=[].slice.call(document.querySelectorAll('.reveal'));
+  items.forEach(function(el){
     var sib=[].slice.call(el.parentNode.children).filter(function(c){ return c.classList.contains('reveal'); });
-    if(sib.length>1){ el.style.setProperty('--d',(Math.min(sib.indexOf(el),5)*0.07)+'s'); }
+    var k=sib.indexOf(el); if(k>0) el.style.setProperty('--d', Math.min(k,4)*0.12+'s');
   });
-  function showAll(){ pending.forEach(function(el){ el.classList.add('in'); }); pending=[]; }
-  function start(){
-    var t=setInterval(function(){
-      if(!pending.length){ clearInterval(t); return; }
-      if(window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4){ showAll(); return; }
-      var line=window.innerHeight*0.92;
-      pending=pending.filter(function(el){
-        if(el.getBoundingClientRect().top < line){ el.classList.add('in'); return false; }
-        return true;
-      });
-    },120);
+  var pending=items.slice();
+  var check=function(){
+    if(!pending.length){ clearInterval(rv); return; }
+    if(window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4){
+      pending.forEach(function(el){ el.classList.add('in'); }); pending=[]; return;
+    }
+    var line=window.innerHeight*0.78;
+    pending=pending.filter(function(el){
+      if(el.getBoundingClientRect().top<line){ el.classList.add('in'); return false; }
+      return true;
+    });
+  };
+  var rv=setInterval(check, 120); check();
+
+  /* 모바일 하단 버튼: 히어로 버튼이 화면 위로 지나가면 올라옴 */
+  var fc=document.getElementById('float-cta'), heroCta=document.querySelector('.hero .cta');
+  if(fc && heroCta){
+    setInterval(function(){
+      var past=heroCta.getBoundingClientRect().bottom<0;
+      if(past!==fc.classList.contains('on')) fc.classList.toggle('on', past);
+    }, 150);
   }
-  var started=false; function go(){ if(started) return; started=true; start(); }
-  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(go); }
-  setTimeout(go,1200);
+
+  /* 네이버 리뷰 띠: 천천히 왼쪽으로(setInterval) · 묶음 복제로 끊김 없이 · 손 대면 멈춤 · 화면 밖이면 쉼 */
+  var rt=document.getElementById('rv-track'), rw=document.getElementById('rv-wrap');
+  if(rt && rw){
+    [].slice.call(rt.children).forEach(function(c){ var d=c.cloneNode(true); d.setAttribute('aria-hidden','true'); rt.appendChild(d); });
+    var rx=0, rStop=false;
+    rw.addEventListener('mouseenter', function(){ rStop=true; });
+    rw.addEventListener('mouseleave', function(){ rStop=false; });
+    rw.addEventListener('touchstart', function(){ rStop=true; }, {passive:true});
+    rw.addEventListener('touchend', function(){ rStop=false; });
+    setInterval(function(){
+      if(rStop) return;
+      var r=rw.getBoundingClientRect(); if(r.bottom<0 || r.top>window.innerHeight) return;
+      var half=rt.scrollWidth/2; rx-=0.8; if(-rx>=half) rx+=half;
+      rt.style.transform='translateX('+rx+'px)';
+    }, 33);
+  }
+
+  /* 가격 토글 부드럽게 */
+  [].slice.call(document.querySelectorAll('.acc details')).forEach(function(d){
+    var sum=d.querySelector('summary'), panel=d.querySelector('.panel'), busy=false;
+    sum.addEventListener('click', function(e){
+      e.preventDefault(); if(busy) return; busy=true;
+      if(d.open){
+        panel.style.height=panel.scrollHeight+'px';
+        setTimeout(function(){ panel.style.transition='height .35s ease'; panel.style.height='0px'; }, 16);
+        setTimeout(function(){ d.open=false; panel.style.cssText=''; busy=false; }, 400);
+      } else {
+        d.open=true; panel.style.height='0px';
+        setTimeout(function(){ panel.style.transition='height .35s ease'; panel.style.height=panel.scrollHeight+'px'; }, 16);
+        setTimeout(function(){ panel.style.cssText=''; busy=false; }, 400);
+      }
+    });
+  });
+
+  /* 부드러운 스크롤(R-25): rAF 직접 이동 · 폴백 · 휠/터치면 중단 · 끝나면 대상 포커스 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest ? e.target.closest('a[href^="#"]') : null; if(!a) return;
+    var id=a.getAttribute('href'); if(id.length<2) return;
+    var t=document.querySelector(id); if(!t) return;
+    e.preventDefault();
+    var head=document.querySelector('.site-head'); var off=(head ? head.getBoundingClientRect().height : 0)+10;
+    var y0=window.pageYOffset; var y1=(id==='#top') ? 0 : Math.max(0, t.getBoundingClientRect().top+y0-off);
+    var dur=700, s0=null, done=false;
+    function ease(p){ return p<.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2; }
+    function stop(){ done=true; window.removeEventListener('wheel',stop); window.removeEventListener('touchstart',stop); }
+    function finish(){ stop(); if(!t.hasAttribute('tabindex')){ t.setAttribute('tabindex','-1'); } t.focus({preventScroll:true}); }
+    window.addEventListener('wheel',stop,{passive:true}); window.addEventListener('touchstart',stop,{passive:true});
+    function step(ts){ if(done) return; if(s0===null) s0=ts; var p=Math.min((ts-s0)/dur,1); window.scrollTo(0, y0+(y1-y0)*ease(p)); if(p<1){ requestAnimationFrame(step); } else { finish(); } }
+    requestAnimationFrame(step);
+    setTimeout(function(){ if(!done){ window.scrollTo(0,y1); finish(); } }, dur+300);
+    if(history.pushState){ history.pushState(null,'',id); }
+  });
 })();
 </script>
 </body>
