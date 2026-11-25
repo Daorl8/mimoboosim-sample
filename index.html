@@ -4,14 +4,14 @@
 <meta charset="utf-8" />
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>미모부심 MIMOBOOSIM | 일산 주엽 왁싱 · 헤드스파 · 피부 · 바디 · LYCON 인증 교육기관</title>
+<title>자디니스파 미모부심 MIMOBOOSIM | 일산 주엽 왁싱 · 헤드스파 · 피부 · 바디 · LYCON 인증 교육기관</title>
 <meta name="description" content="LYCON 인증 교육기관 미모부심. 일산에서 10년째 에스테틱을 운영중이며 현) 라이콘 인증 교육 강사가 운영하는 샵. 경기 고양시 일산서구 강성로 121 삼희프라자 2층 201호." />
 <link rel="canonical" href="https://mimoboosim-sample.lgt3232.workers.dev/" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:site_name" content="미모부심" />
-<meta property="og:title" content="미모부심 · LYCON 인증 교육기관" />
-<meta property="og:description" content="빠르고 안아픈 퀵 브라질리언 · 헤드스파 · 피부 · 바디 · 일산 주엽역" />
+<meta property="og:site_name" content="자디니스파 미모부심" />
+<meta property="og:title" content="자디니스파 미모부심 · LYCON 인증 교육기관" />
+<meta property="og:description" content="빠른 퀵 브라질리언 · 헤드스파 · 피부 · 바디 · 일산 주엽역" />
 <meta property="og:url" content="https://mimoboosim-sample.lgt3232.workers.dev/" />
 <meta property="og:image" content="https://mimoboosim-sample.lgt3232.workers.dev/og-mm.jpg" />
 <meta property="og:image:width" content="1200" />
@@ -24,10 +24,11 @@
 {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
-  "name": "미모부심",
+  "name": "자디니스파 미모부심",
+  "alternateName": "미모부심",
   "url": "https://mimoboosim-sample.lgt3232.workers.dev/",
   "image": "https://mimoboosim-sample.lgt3232.workers.dev/og-mm.jpg",
-  "telephone": "+82-507-1368-0878",
+  "telephone": "+82-10-7596-0878",
   "address": { "@type": "PostalAddress", "streetAddress": "강성로 121 삼희프라자 2층 201호", "addressLocality": "고양시 일산서구", "addressRegion": "경기도", "addressCountry": "KR" },
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "10:00", "closes": "22:30" }
@@ -38,9 +39,9 @@
 <style>
 /* ── 폰트 (로컬 서브셋 · OFL · 라이선스 정보 보존)
      영문 제목 = Gilda Display / 한글·본문·작은 영문 = Interop (우호뷰티 샘플과 같은 조합 · v0.3 사장님 요청) */
-@font-face{ font-family:"MM Display"; font-weight:400; font-display:swap; src:url("mm-gilda-v031.woff2") format("woff2"); }
-@font-face{ font-family:"MM Sans"; font-weight:400; font-display:swap; src:url("mm-interop-400-v031.woff2") format("woff2"); }
-@font-face{ font-family:"MM Sans"; font-weight:500; font-display:swap; src:url("mm-interop-500-v031.woff2") format("woff2"); }
+@font-face{ font-family:"MM Display"; font-weight:400; font-display:swap; src:url("mm-gilda-v033.woff2") format("woff2"); }
+@font-face{ font-family:"MM Sans"; font-weight:400; font-display:swap; src:url("mm-interop-400-v033.woff2") format("woff2"); }
+@font-face{ font-family:"MM Sans"; font-weight:500; font-display:swap; src:url("mm-interop-500-v033.woff2") format("woff2"); }
 
 :root{
   --white:#FFFFFF;
@@ -343,6 +344,29 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
 @media (min-width:900px){ .aca-top{ grid-template-columns:1.2fr .8fr; gap:80px; align-items:end; } }
 .aca-quote{ margin:0 0 clamp(36px,5vw,56px); padding:clamp(22px,3vw,34px) 0; border-top:1px solid var(--mag); border-bottom:1px solid var(--blush-2); }
 .aca-quote p{ margin:0; font-family:var(--sans); font-weight:500; font-size:clamp(1.4rem,3.2vw,2.2rem); line-height:1.4; letter-spacing:-.02em; }
+
+/* ── v0.3.3 우호뷰티와 다르게 (다올 A + 리뷰 카드 B) */
+.label:not(.kicker)::before{ content:""; display:inline-block; width:18px; height:1px; margin-right:10px; vertical-align:middle; background:var(--mag); }
+.kicker::before{ width:28px; height:1px; border:0; border-radius:0; background:var(--mag); }
+/* 오시는 길 링크: 칸 → 선 목록 */
+.links{ grid-template-columns:minmax(0,1fr); gap:0; border-top:1px solid var(--ink); }
+.links a, .links a.main{ grid-column:auto; flex-direction:row; align-items:center; gap:12px; min-height:60px; padding:0 4px; border:0; border-bottom:1px solid var(--line); background:transparent; color:var(--ink); }
+.links a b{ font-family:var(--disp); font-weight:400; font-size:1.2rem; }
+.links a span, .links a.main span{ margin-left:auto; color:var(--soft); text-align:right; }
+.links a.main span{ color:var(--ink); font-weight:500; }
+.links a::after{ content:"→"; font-family:var(--disp); color:var(--mag); }
+@media (hover:hover){ .links a:hover, .links a.main:hover{ background:var(--grad); color:var(--ink); } .links a.main:hover span{ color:var(--ink); } }
+/* 푸터: 큰 로고 가운데 */
+.foot .wrap{ justify-items:center; text-align:center; }
+.foot .brand img{ height:64px; }
+.foot nav{ justify-content:center; }
+@media (min-width:900px){ .foot .wrap{ grid-template-columns:minmax(0,1fr); gap:22px; } }
+/* 리뷰 카드: 상자 → 인용 (B) */
+.rv-card{ display:flex; flex-direction:column; background:transparent; border:0; border-top:1px solid var(--mag); border-radius:0; padding:12px 2px 0; }
+.rv-card::before{ content:"\201C"; font-family:var(--disp); font-size:3.2rem; line-height:.9; color:var(--mag); }
+.rv-card p{ order:1; }
+.rv-top{ order:2; margin:14px 0 0; padding-top:10px; border-top:1px solid var(--line); }
+.rv-src{ order:3; margin-top:4px; }
 </style>
 <noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
 </head>
@@ -354,7 +378,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
     <nav class="nav" aria-label="주요 메뉴">
       <a href="#signature">Signature</a><a href="#reviews">Reviews</a><a href="#about">About</a><a href="#menu">Menu</a><a href="#academy">Academy</a><a href="#visit">Visit</a>
     </nav>
-    <a class="btn dark" href="tel:050713680878">전화 예약</a>
+    <a class="btn dark" href="tel:01075960878">전화 예약</a>
   </div>
   <nav class="snav" aria-label="섹션 바로가기">
     <a href="#signature">Signature</a><a href="#reviews">Reviews</a><a href="#about">About</a><a href="#menu">Menu</a><a href="#academy">Academy</a><a href="#visit">Visit</a>
@@ -378,12 +402,12 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
           </div>
           <h1 id="hero-h">"당신의 미모가<br />눈부셔 질때까지"</h1>
           <ul class="points">
-            <li>빠르고 안아픈 "퀵 브라질리언" 시술</li>
+            <li>빠른 "퀵 브라질리언" 시술</li>
             <li>왁싱 · 헤드스파 · 피부 · 바디 · <span class="nw">반영구 · 속눈썹펌</span></li>
             <li>왁싱/피부 수강 전문 <span class="nw">(1day / 3day /master)</span></li>
           </ul>
           <div class="cta">
-            <a class="btn dark" href="tel:050713680878">전화 예약</a>
+            <a class="btn dark" href="tel:01075960878">전화 예약</a>
             <a class="btn blush" href="sms:01075960878">문자 문의</a>
           </div>
         </div>
@@ -494,7 +518,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
       <div class="head split reveal">
         <div>
           <p class="label">Menu<span class="ko">가격</span></p>
-          <h2 id="menu-h" style="margin-top:20px">Price list.<span class="ko-t">시술 가격 안내</span></h2>
+          <h2 id="menu-h" style="margin-top:20px">The Menu.<span class="ko-t">시술 가격 안내</span></h2>
         </div>
         <p class="lead r">네이버 플레이스 가격표 기준이에요.<br class="m-br" /> 이벤트 가격은 인스타그램 공지를 <span class="nw">확인해 주세요.</span></p>
       </div>
@@ -505,7 +529,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
             <dl class="price">
               <div class="row"><dt><span class="en">(여)브라질리언<span class="tag">Signature</span></span><small>첫방문</small></dt><dd>49,000<small>원</small></dd></div>
               <div class="row"><dt><span class="en">(남)브라질리언<span class="tag">Signature</span></span><small>첫방문</small></dt><dd>60,000<small>원</small></dd></div>
-              <div class="row"><dt>트리트먼트팩+인그로운제거<small>왁싱 시</small></dt><dd>서비스</dd></div>
+              <div class="row"><dt>트리트먼트팩+인그로운제거</dt><dd>서비스</dd></div>
             </dl>
           </div>
           <div class="grp reveal">
@@ -545,7 +569,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
       <div class="aca-top">
         <div class="reveal">
           <p class="label">Academy<span class="ko">왁싱 · 피부 교육</span></p>
-          <h2 id="academy-h" style="margin-top:20px">LYCON<br />Certified Academy.<span class="ko-t">LYCON 인증 교육기관 · 자디니스파 총괄교육센터</span></h2>
+          <h2 id="academy-h" style="margin-top:20px">Learn with<br />LYCON.<span class="ko-t">LYCON 인증 교육기관 · 자디니스파 총괄교육센터</span></h2>
           <p class="lead" style="margin-top:22px">미모부심은 풍부한 실무 경험을 바탕으로 고객에게는 섬세하고 완성도 높은 시술을, 수강생에게는 현장에서 바로 활용할 수 있는 실질적인 교육을 제공합니다. 단순히 기술을 배우는 것을 넘어 고객 상담부터 시술 노하우, 샵 운영에 필요한 실전 경쟁력까지 함께 전달합니다.</p>
           <div class="cta" style="margin-top:30px">
             <a class="btn dark" href="tel:01075960878">수강문의 <small>010-7596-0878</small></a>
@@ -571,7 +595,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
     <div class="wrap">
       <div class="head reveal">
         <p class="label">Visit<span class="ko">오시는 길</span></p>
-        <h2 id="visit-h">Find us in Juyeop.<span class="ko-t">주엽역 7번 출구 앞 다이소 주엽점 건물 2층</span></h2>
+        <h2 id="visit-h">Come to Juyeop.<span class="ko-t">주엽역 7번 출구 앞 다이소 주엽점 건물 2층</span></h2>
       </div>
       <div class="visit">
         <div class="reveal">
@@ -580,12 +604,12 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
             <div class="row"><dt>Way<small>찾아가는 길</small></dt><dd><p>주엽역 그랜드 백화점 건너편 7번 출구 앞 다이소 주엽점 건물 2층으로 <span class="nw">오시면 됩니다.</span></p><p>3호선 주엽역 <span class="nw">7번출구에서 도보1분</span></p><p>주엽역 버스 <span class="nw">중앙차로에서 도보5분</span></p></dd></div>
             <div class="row"><dt>Parking<small>주차</small></dt><dd><p>주차공간 여유(무료주차)</p><p>네비게이션에 다이소 주엽점 입력하시고 삼희프라자에 <span class="nw">주차하시면 됩니다.</span></p></dd></div>
             <div class="row"><dt>Hours<small>영업시간</small></dt><dd><div class="hours"><span>월–토</span><span>10:00 – 22:30</span><span>일</span><span>정기휴무 <span class="nw">(매주 일요일)</span></span></div><p class="hnote">일요일은 예약제로 운영합니다.</p></dd></div>
-            <div class="row"><dt>Tel<small>전화</small></dt><dd><p><a href="tel:050713680878">0507-1368-0878</a></p><p>시술예약 / 수강문의 <a href="tel:01075960878" class="nw">010-7596-0878</a></p></dd></div>
+            <div class="row"><dt>Tel<small>전화</small></dt><dd><p>시술예약 / 수강문의 <a href="tel:01075960878" class="nw">010-7596-0878</a></p><p>네이버 <a href="tel:050713680878" class="nw">0507-1368-0878</a></p></dd></div>
           </dl>
         </div>
         <div class="reveal">
           <nav class="links" aria-label="예약 · 문의 링크">
-            <a class="main" href="tel:050713680878"><b>Call</b><span>전화 예약 0507-1368-0878</span></a>
+            <a class="main" href="tel:01075960878"><b>Call</b><span>전화 예약 010-7596-0878</span></a>
             <a href="sms:01075960878"><b>Message</b><span>문자 문의</span></a>
             <a href="https://www.instagram.com/_mimoboosim_/" target="_blank" rel="noopener"><b>Instagram</b><span>@_mimoboosim_</span></a>
             <a href="https://map.naver.com/p/entry/place/1764735148" target="_blank" rel="noopener"><b>Naver Map</b><span>네이버 길찾기</span></a>
@@ -600,7 +624,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
 </main>
 
 <nav class="float-cta" id="float-cta" aria-label="빠른 예약 · 문의">
-  <a class="btn dark" href="tel:050713680878">전화 예약</a>
+  <a class="btn dark" href="tel:01075960878">전화 예약</a>
   <a class="btn blush" href="sms:01075960878">문자 문의</a>
 </nav>
 
@@ -608,7 +632,7 @@ html{ scroll-behavior:auto; scroll-padding-top:120px; }
   <div class="wrap">
     <span class="brand"><img src="mm-logo.svg" alt="미모부심" width="110" height="39" loading="lazy" /></span>
     <div>
-      <p>미모부심 · LYCON 인증 교육기관 · 자디니스파 총괄교육센터</p>
+      <p>자디니스파 미모부심 · LYCON 인증 교육기관 · 자디니스파 총괄교육센터</p>
       <p>경기 고양시 일산서구 <span class="nw">강성로 121</span> <span class="nw">삼희프라자 2층 201호</span></p>
       <p>© MIMOBOOSIM</p>
     </div>
